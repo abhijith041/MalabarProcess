@@ -1,0 +1,3445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230615 15:25:28.622" rpa="true" schemaversion="3">
+<suite id="s1" name="Tasks" source="d:\MalabarProjectGit\tasks.robot">
+<test id="s1-t1" name="petty cash processing bot" line="13">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${config_status}</var>
+<arg>Read config file</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Read config file" library="VoucherDataExtraction">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{out_config}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230615 15:26:17.977" level="INFO">&amp;{out_config} = { }</msg>
+<status status="PASS" starttime="20230615 15:26:17.973" endtime="20230615 15:26:17.983"/>
+</kw>
+<kw name="Open Workbook" library="RPA.Excel.Files">
+<arg>${CONFIG_FILE}</arg>
+<doc>Open an existing Excel workbook.</doc>
+<msg timestamp="20230615 15:26:18.188" level="INFO">Opened workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x0000021202CB6C70&gt;</msg>
+<status status="PASS" starttime="20230615 15:26:17.986" endtime="20230615 15:26:18.189"/>
+</kw>
+<for flavor="IN">
+<var>${sheet}</var>
+<value>@{CONFIG_SHEETS}</value>
+<iter>
+<var name="${sheet}">Settings</var>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${table}</var>
+<arg>${sheet}</arg>
+<arg>header=${True}</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20230615 15:26:18.200" level="INFO">Created table: Table(columns=['Name', 'Value', 'Description'], rows=14)</msg>
+<msg timestamp="20230615 15:26:18.203" level="INFO">${table} = Table(columns=['Name', 'Value', 'Description'], rows=14)</msg>
+<status status="PASS" starttime="20230615 15:26:18.191" endtime="20230615 15:26:18.204"/>
+</kw>
+<for flavor="IN">
+<var>${row}</var>
+<value>@{table}</value>
+<iter>
+<var name="${row}">{'Name': 'logF_BusinessProcessName', 'Value': 'Framework', 'Description': 'Logging field which allows grouping of log data of two or more subprocesses under the same business process name'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.220" endtime="20230615 15:26:18.226"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.218" endtime="20230615 15:26:18.226"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.211" endtime="20230615 15:26:18.227"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.208" endtime="20230615 15:26:18.227"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'InputFile', 'Value': 'Data\\Input\\input.xlsx', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.232" endtime="20230615 15:26:18.238"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.230" endtime="20230615 15:26:18.238"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.228" endtime="20230615 15:26:18.238"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.228" endtime="20230615 15:26:18.239"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'SheetName', 'Value': 'Sheet1', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.242" endtime="20230615 15:26:18.245"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.241" endtime="20230615 15:26:18.245"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.239" endtime="20230615 15:26:18.245"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.239" endtime="20230615 15:26:18.246"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'url', 'Value': None, 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.251" endtime="20230615 15:26:18.256"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.250" endtime="20230615 15:26:18.256"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.247" endtime="20230615 15:26:18.257"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.246" endtime="20230615 15:26:18.257"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'StatusColumn', 'Value': '_', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.259" endtime="20230615 15:26:18.264"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.259" endtime="20230615 15:26:18.266"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.258" endtime="20230615 15:26:18.267"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.257" endtime="20230615 15:26:18.267"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'RemarksColumn', 'Value': '_', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.272" endtime="20230615 15:26:18.276"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.271" endtime="20230615 15:26:18.276"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.269" endtime="20230615 15:26:18.277"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.268" endtime="20230615 15:26:18.277"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'RootFolder', 'Value': '\\InputFolder\\', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.279" endtime="20230615 15:26:18.286"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.279" endtime="20230615 15:26:18.287"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.277" endtime="20230615 15:26:18.287"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.277" endtime="20230615 15:26:18.287"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'engine_connection_string', 'Value': 'mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.290" endtime="20230615 15:26:18.293"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.290" endtime="20230615 15:26:18.295"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.288" endtime="20230615 15:26:18.296"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.288" endtime="20230615 15:26:18.296"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'pymysql_connection_string', 'Value': "host='127.0.0.1',user='root',password='Password.123',database='malabarprocessdb',port=3306'", 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.305" endtime="20230615 15:26:18.310"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.304" endtime="20230615 15:26:18.310"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.301" endtime="20230615 15:26:18.310"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.297" endtime="20230615 15:26:18.310"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'SubscriptionKey', 'Value': '34729f664d044096bc9e06e162f7a47e', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.318" endtime="20230615 15:26:18.323"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.313" endtime="20230615 15:26:18.323"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.311" endtime="20230615 15:26:18.324"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.311" endtime="20230615 15:26:18.325"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'EndPoint', 'Value': 'https://quadanceocrgroup.cognitiveservices.azure.com/', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.328" endtime="20230615 15:26:18.334"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.327" endtime="20230615 15:26:18.335"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.326" endtime="20230615 15:26:18.336"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.325" endtime="20230615 15:26:18.336"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'mail_subject', 'Value': 'nibyamonas@gmail.com', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.339" endtime="20230615 15:26:18.341"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.339" endtime="20230615 15:26:18.341"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.337" endtime="20230615 15:26:18.341"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.336" endtime="20230615 15:26:18.341"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'erp_transaction_table', 'Value': 'erp_transaction_table', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.345" endtime="20230615 15:26:18.351"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.343" endtime="20230615 15:26:18.352"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.342" endtime="20230615 15:26:18.352"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.342" endtime="20230615 15:26:18.352"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'Processfolder', 'Value': '\\ProccessedFolder\\', 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.354" endtime="20230615 15:26:18.356"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.354" endtime="20230615 15:26:18.357"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.353" endtime="20230615 15:26:18.357"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.352" endtime="20230615 15:26:18.357"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:18.206" endtime="20230615 15:26:18.357"/>
+</for>
+<status status="PASS" starttime="20230615 15:26:18.190" endtime="20230615 15:26:18.357"/>
+</iter>
+<iter>
+<var name="${sheet}">Constants</var>
+<kw name="Read Worksheet As Table" library="RPA.Excel.Files">
+<var>${table}</var>
+<arg>${sheet}</arg>
+<arg>header=${True}</arg>
+<doc>Read the contents of a worksheet into a Table container. Allows
+sorting/filtering/manipulating using the ``RPA.Tables`` library.</doc>
+<msg timestamp="20230615 15:26:18.361" level="INFO">Created table: Table(columns=['Name', 'Value', 'Description'], rows=16)</msg>
+<msg timestamp="20230615 15:26:18.362" level="INFO">${table} = Table(columns=['Name', 'Value', 'Description'], rows=16)</msg>
+<status status="PASS" starttime="20230615 15:26:18.358" endtime="20230615 15:26:18.362"/>
+</kw>
+<for flavor="IN">
+<var>${row}</var>
+<value>@{table}</value>
+<iter>
+<var name="${row}">{'Name': 'MaxRetryNumber', 'Value': 1, 'Description': 'Must be 0 if working with Orchestrator queues. If &gt; 0, the robot will retry the same transaction which failed with a system exception. Must be an...</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.368" endtime="20230615 15:26:18.369"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.367" endtime="20230615 15:26:18.369"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.366" endtime="20230615 15:26:18.371"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.365" endtime="20230615 15:26:18.371"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'MaxConsecutiveSystemExceptions', 'Value': 2, 'Description': 'The number of consecutive system exceptions allowed. If MaxConsecutiveSystemExceptions is reached, the job is stopped. To disable...</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.373" endtime="20230615 15:26:18.375"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.372" endtime="20230615 15:26:18.375"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.371" endtime="20230615 15:26:18.375"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.371" endtime="20230615 15:26:18.375"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': None, 'Value': None, 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:18.378" endtime="20230615 15:26:18.378"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:18.377" endtime="20230615 15:26:18.378"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.376" endtime="20230615 15:26:18.378"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.376" endtime="20230615 15:26:18.378"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'ExScreenshotsFolderPath', 'Value': 'Exceptions_Screenshots', 'Description': 'Where to save exceptions screenshots - can be a full or a relative path.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.382" endtime="20230615 15:26:18.385"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.380" endtime="20230615 15:26:18.385"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.379" endtime="20230615 15:26:18.385"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.379" endtime="20230615 15:26:18.385"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': None, 'Value': None, 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:18.387" endtime="20230615 15:26:18.387"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:18.387" endtime="20230615 15:26:18.387"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.386" endtime="20230615 15:26:18.388"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.385" endtime="20230615 15:26:18.388"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'LogMessage_GetTransactionData', 'Value': 'Processing Transaction Number: ', 'Description': 'Static part of logging message. Calling Get Transaction Data.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.389" endtime="20230615 15:26:18.391"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.389" endtime="20230615 15:26:18.391"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.388" endtime="20230615 15:26:18.392"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.388" endtime="20230615 15:26:18.392"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'LogMessage_GetTransactionDataError', 'Value': 'Error getting transaction data for Transaction Number: ', 'Description': 'Static part of logging message. Error retrieving Transaction Data.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.394" endtime="20230615 15:26:18.396"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.394" endtime="20230615 15:26:18.396"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.393" endtime="20230615 15:26:18.397"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.392" endtime="20230615 15:26:18.397"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'LogMessage_Success', 'Value': 'Transaction Successful.', 'Description': 'Static part of logging message. Processed Transaction succesful.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.401" endtime="20230615 15:26:18.404"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.401" endtime="20230615 15:26:18.405"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.398" endtime="20230615 15:26:18.405"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.397" endtime="20230615 15:26:18.405"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'LogMessage_BusinessRuleException', 'Value': 'Business rule exception.', 'Description': 'Static part of logging message. Processed Transaction failed with business exception.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.408" endtime="20230615 15:26:18.412"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.407" endtime="20230615 15:26:18.412"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.406" endtime="20230615 15:26:18.413"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.405" endtime="20230615 15:26:18.413"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'LogMessage_ApplicationException', 'Value': 'System exception.', 'Description': 'Static part of logging message. Processed Transaction failed with application exception.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.417" endtime="20230615 15:26:18.420"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.416" endtime="20230615 15:26:18.420"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.415" endtime="20230615 15:26:18.421"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.414" endtime="20230615 15:26:18.421"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'ExceptionMessage_ConsecutiveErrors', 'Value': 'The maximum number of consecutive system exceptions was reached. ', 'Description': 'Error message in case MaxConsecutiveSystemExceptions number...</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.428" endtime="20230615 15:26:18.435"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.427" endtime="20230615 15:26:18.436"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.425" endtime="20230615 15:26:18.436"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.423" endtime="20230615 15:26:18.436"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': None, 'Value': None, 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:18.441" endtime="20230615 15:26:18.441"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:18.439" endtime="20230615 15:26:18.442"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.438" endtime="20230615 15:26:18.442"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.437" endtime="20230615 15:26:18.442"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'RetryNumberGetTransactionItem', 'Value': 2, 'Description': 'The number of times Get Transaction Item activity is retried in case of an exception. Must be an integer &gt;= 1.'}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.444" endtime="20230615 15:26:18.446"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.444" endtime="20230615 15:26:18.447"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.443" endtime="20230615 15:26:18.448"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.442" endtime="20230615 15:26:18.448"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'RetryNumberSetTransactionStatus', 'Value': 2, 'Description': 'The number of times Set transaction status activity is retried in case of an exception. Must be an integer &gt;= 1. '}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.452" endtime="20230615 15:26:18.457"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.451" endtime="20230615 15:26:18.457"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.450" endtime="20230615 15:26:18.458"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.449" endtime="20230615 15:26:18.458"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': None, 'Value': None, 'Description': None}</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:18.461" endtime="20230615 15:26:18.461"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:18.459" endtime="20230615 15:26:18.461"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.459" endtime="20230615 15:26:18.462"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.459" endtime="20230615 15:26:18.462"/>
+</iter>
+<iter>
+<var name="${row}">{'Name': 'ShouldMarkJobAsFaulted', 'Value': False, 'Description': 'Must be TRUE or FALSE. If the value is TRUE and an error occurs in Initialization state or the MaxConsecutiveSystemExceptions is reac...</var>
+<if>
+<branch type="IF" condition="&quot;${row['Name']}&quot; != &quot;${null}&quot;">
+<kw name="Set To Dictionary" library="Collections">
+<arg>${out_config}</arg>
+<arg>${row['Name']}</arg>
+<arg>${row['Value']}</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20230615 15:26:18.466" endtime="20230615 15:26:18.469"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.466" endtime="20230615 15:26:18.470"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.463" endtime="20230615 15:26:18.470"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:18.462" endtime="20230615 15:26:18.470"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:18.363" endtime="20230615 15:26:18.470"/>
+</for>
+<status status="PASS" starttime="20230615 15:26:18.358" endtime="20230615 15:26:18.470"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:18.189" endtime="20230615 15:26:18.471"/>
+</for>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${CONFIG}</arg>
+<arg>${out_config}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:18.471" level="INFO">${CONFIG} = {'logF_BusinessProcessName': 'Framework', 'InputFile': 'Data\\Input\\input.xlsx', 'SheetName': 'Sheet1', 'url': None, 'StatusColumn': '_', 'RemarksColumn': '_', 'RootFolder': '\\InputFolder\\', 'engin...</msg>
+<status status="PASS" starttime="20230615 15:26:18.471" endtime="20230615 15:26:18.472"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${engine_str}</var>
+<arg>${CONFIG['engine_connection_string']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:18.473" level="INFO">${engine_str} = mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb</msg>
+<status status="PASS" starttime="20230615 15:26:18.472" endtime="20230615 15:26:18.474"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pymysql_connection}</var>
+<arg>${CONFIG['pymysql_connection_string']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:18.476" level="INFO">${pymysql_connection} = host='127.0.0.1',user='root',password='Password.123',database='malabarprocessdb',port=3306'</msg>
+<status status="PASS" starttime="20230615 15:26:18.474" endtime="20230615 15:26:18.476"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${engine_str}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:18.477" level="INFO">${engine_str} = mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb</msg>
+<status status="PASS" starttime="20230615 15:26:18.477" endtime="20230615 15:26:18.478"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${pymysql_connection}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:18.479" level="INFO">${pymysql_connection} = host='127.0.0.1',user='root',password='Password.123',database='malabarprocessdb',port=3306'</msg>
+<status status="PASS" starttime="20230615 15:26:18.478" endtime="20230615 15:26:18.479"/>
+</kw>
+<kw name="Close Workbook" library="RPA.Excel.Files">
+<doc>Close the active workbook.</doc>
+<msg timestamp="20230615 15:26:18.483" level="INFO">Closing workbook: &lt;RPA.Excel.Files.XlsxWorkbook object at 0x0000021202CB6C70&gt;</msg>
+<status status="PASS" starttime="20230615 15:26:18.479" endtime="20230615 15:26:18.483"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:17.968" endtime="20230615 15:26:18.484"/>
+</kw>
+<msg timestamp="20230615 15:26:18.485" level="INFO">${config_status} = True</msg>
+<status status="PASS" starttime="20230615 15:26:17.963" endtime="20230615 15:26:18.485"/>
+</kw>
+<if>
+<branch type="IF" condition="${config_status} == $True">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${mail_status}</var>
+<arg>email fetching based on subject</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Email Fetching Based On Subject" library="emailFetchingPy">
+<kw name="Set Variable" library="BuiltIn">
+<var>${duration}</var>
+<arg>${polling_duration}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:18.491" level="INFO">${duration} = 0</msg>
+<status status="PASS" starttime="20230615 15:26:18.490" endtime="20230615 15:26:18.491"/>
+</kw>
+<kw name="process run starting time convert into seconds" library="emailFetchingPy">
+<var>${startTimeInSeconds}</var>
+<kw name="Get Time" library="BuiltIn">
+<var>${startingTime}</var>
+<doc>Returns the given time in the requested format.</doc>
+<msg timestamp="20230615 15:26:18.495" level="INFO">${startingTime} = 2023-06-15 15:26:18</msg>
+<status status="PASS" starttime="20230615 15:26:18.494" endtime="20230615 15:26:18.495"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nProcess starting time is :${startingTime}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:18.496" endtime="20230615 15:26:18.499"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${startingTimeSeconds}</var>
+<arg>Should Match Regexp</arg>
+<arg>${startingTime}</arg>
+<arg>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Should Match Regexp" library="BuiltIn">
+<arg>${startingTime}</arg>
+<arg>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<msg timestamp="20230615 15:26:18.506" level="FAIL">'2023-06-15 15:26:18' does not match 'd{4}-d{2}-d{2} d{2}:d{2}:d{2}'</msg>
+<status status="FAIL" starttime="20230615 15:26:18.503" endtime="20230615 15:26:18.507"/>
+</kw>
+<msg timestamp="20230615 15:26:18.507" level="INFO">${startingTimeSeconds} = False</msg>
+<status status="PASS" starttime="20230615 15:26:18.501" endtime="20230615 15:26:18.507"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${startingTimeSeconds}</arg>
+<arg>Run Keyword And Continue On Failure</arg>
+<arg>Fail</arg>
+<arg>Invalid starting time format</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20230615 15:26:18.508" endtime="20230615 15:26:18.509"/>
+</kw>
+<kw name="Split String" library="String">
+<var>${startTimeParts}</var>
+<arg>${startingTime}</arg>
+<arg>separator=.</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<msg timestamp="20230615 15:26:18.511" level="INFO">${startTimeParts} = ['2023-06-15 15:26:18']</msg>
+<status status="PASS" starttime="20230615 15:26:18.509" endtime="20230615 15:26:18.511"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${startTime}</var>
+<arg>${startTimeParts}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:18.513" level="INFO">${startTime} = 2023-06-15 15:26:18</msg>
+<status status="PASS" starttime="20230615 15:26:18.512" endtime="20230615 15:26:18.513"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${startTimeObj}</var>
+<arg>datetime.datetime.strptime($startTime, "%Y-%m-%d %H:%M:%S")</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230615 15:26:18.521" level="INFO">${startTimeObj} = 2023-06-15 15:26:18</msg>
+<status status="PASS" starttime="20230615 15:26:18.516" endtime="20230615 15:26:18.521"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${startTimeInSeconds}</var>
+<arg>$startTimeObj.timestamp()</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230615 15:26:18.526" level="INFO">${startTimeInSeconds} = 1686822978.0</msg>
+<status status="PASS" starttime="20230615 15:26:18.523" endtime="20230615 15:26:18.526"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Starting Time in Seconds: ${startTimeInSeconds}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:18.527" endtime="20230615 15:26:18.529"/>
+</kw>
+<return>
+<value>${startTimeInSeconds}</value>
+<status status="PASS" starttime="20230615 15:26:18.534" endtime="20230615 15:26:18.535"/>
+</return>
+<msg timestamp="20230615 15:26:18.536" level="INFO">${startTimeInSeconds} = 1686822978.0</msg>
+<status status="PASS" starttime="20230615 15:26:18.492" endtime="20230615 15:26:18.537"/>
+</kw>
+<for flavor="IN">
+<var>${subject}</var>
+<value>@{EMAIL_SUBJECT}</value>
+<iter>
+<var name="${subject}">Project Petty</var>
+<kw name="Fetch Email Based On Subject" library="emailFetchingPython">
+<var>${filteredEmails}</var>
+<arg>${subject}</arg>
+<arg>${duration}</arg>
+<arg>${startTimeInSeconds}</arg>
+<msg timestamp="20230615 15:26:19.139" level="INFO">${filteredEmails} = []</msg>
+<status status="PASS" starttime="20230615 15:26:18.539" endtime="20230615 15:26:19.139"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${emailLength}</var>
+<arg>${filteredEmails}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:26:19.142" level="INFO">Length is 0</msg>
+<msg timestamp="20230615 15:26:19.142" level="INFO">${emailLength} = 0</msg>
+<status status="PASS" starttime="20230615 15:26:19.141" endtime="20230615 15:26:19.142"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nSearching for email with subject : ${subject}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.143" endtime="20230615 15:26:19.144"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Searching for email with subject : ${subject}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:19.145" level="INFO">Searching for email with subject : Project Petty</msg>
+<status status="PASS" starttime="20230615 15:26:19.144" endtime="20230615 15:26:19.145"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nTotal email with given subject is: ${emailLength}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.146" endtime="20230615 15:26:19.149"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total email with given subject is: ${emailLength}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:19.151" level="INFO">Total email with given subject is: 0</msg>
+<status status="PASS" starttime="20230615 15:26:19.150" endtime="20230615 15:26:19.151"/>
+</kw>
+<kw name="Get Init Details" library="MyLibrary">
+<var>${attachmentDownloadFolder}</var>
+<msg timestamp="20230615 15:26:19.153" level="INFO">${attachmentDownloadFolder} = D:\MalabarProjectGit</msg>
+<status status="PASS" starttime="20230615 15:26:19.153" endtime="20230615 15:26:19.154"/>
+</kw>
+<for flavor="IN">
+<var>${email}</var>
+<value>@{filteredEmails}</value>
+<iter>
+<var name="${email}"/>
+<kw name="Find Sender Email" library="emailFetchingPython">
+<var>${senderId}</var>
+<arg>${email}</arg>
+<doc>collect sender emailid from email</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.155" endtime="20230615 15:26:19.155"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Email subject from collected mail is: ${email.Subject}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.156" endtime="20230615 15:26:19.156"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>mail seder id : ${senderId}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.156" endtime="20230615 15:26:19.157"/>
+</kw>
+<kw name="Email Sending Time" library="emailFetchingPython">
+<var>${sendingTime}</var>
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.157" endtime="20230615 15:26:19.157"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>'${sendingTime}'</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.157" endtime="20230615 15:26:19.158"/>
+</kw>
+<kw name="Get Email Attachment Count" library="emailFetchingPy">
+<var>${attachmentCount}</var>
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.158" endtime="20230615 15:26:19.158"/>
+</kw>
+<if>
+<branch type="IF" condition="${attachmentCount} &gt; 0">
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>${attachmentCount}</value>
+<iter>
+<var name="${index}"/>
+<kw name="Get Email Attachments Name" library="emailFetchingPy">
+<var>${attachmentNames}</var>
+<arg>${email}</arg>
+<arg>${index}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.160" endtime="20230615 15:26:19.160"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.160" endtime="20230615 15:26:19.160"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.159" endtime="20230615 15:26:19.161"/>
+</for>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${attachmentNames}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.161" endtime="20230615 15:26:19.161"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.159" endtime="20230615 15:26:19.161"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.159" endtime="20230615 15:26:19.162"/>
+</if>
+<if>
+<branch type="IF" condition="${attachmentCount} == 0">
+<kw name="Log" library="BuiltIn">
+<arg>the email doesnot containing any attachments</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.162" endtime="20230615 15:26:19.163"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: The email doesn't containing any attachments</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.163" endtime="20230615 15:26:19.164"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.164" endtime="20230615 15:26:19.165"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.165" endtime="20230615 15:26:19.165"/>
+</kw>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current FOR loop iteration and continues from the next.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.167" endtime="20230615 15:26:19.169"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.162" endtime="20230615 15:26:19.169"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.162" endtime="20230615 15:26:19.170"/>
+</if>
+<kw name="Check Attachments With Multiple Excel" library="emailFetchingPython">
+<var>${excelFileList}</var>
+<arg>${attachmentNames}</arg>
+<doc>check number of excel files in email attachments</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.170" endtime="20230615 15:26:19.171"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${excelAttachmentLength}</var>
+<arg>${excelFileList}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.171" endtime="20230615 15:26:19.172"/>
+</kw>
+<kw name="Check Attachments With Multiple Zip" library="emailFetchingPython">
+<var>${zipFileList}</var>
+<arg>${attachmentNames}</arg>
+<doc>check number of  files in email attachments</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.173" endtime="20230615 15:26:19.173"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${zipAttachmentLEngth}</var>
+<arg>${zipFileList}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.174" endtime="20230615 15:26:19.174"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>excel attachments is: ${excelFileList}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.174" endtime="20230615 15:26:19.176"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>excel attachments is: ${excelFileList}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.176" endtime="20230615 15:26:19.177"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>zip attachments is: ${zipFileList}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.177" endtime="20230615 15:26:19.178"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>zip attachments is: ${zipFileList}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.178" endtime="20230615 15:26:19.179"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${sendingTime}</var>
+<arg>${sendingTime}</arg>
+<arg>:</arg>
+<arg>-</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.179" endtime="20230615 15:26:19.180"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${senderId_sendingTime}</var>
+<arg>${senderId}_</arg>
+<arg>${sendingTime}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.180" endtime="20230615 15:26:19.183"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${attachmentDownloadPath}</var>
+<arg>${attachmentDownloadFolder}${/}InputFolder${/}${senderId_sendingTime}${/}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.184" endtime="20230615 15:26:19.185"/>
+</kw>
+<if>
+<branch type="IF" condition="'${excelAttachmentLength}' == '1' and '${zipAttachmentLength}' == '1'">
+<kw name="Log To Console" library="BuiltIn">
+<arg>excel attachment length is 1 and zip attachment length is 1</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.186" endtime="20230615 15:26:19.187"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>excel attachment length is 1 and zip attachment length is 1</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.187" endtime="20230615 15:26:19.188"/>
+</kw>
+<for flavor="IN">
+<var>${attachment}</var>
+<value>@{email.Attachments}</value>
+<iter>
+<var name="${attachment}"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>downloading: ${attachment.FileName}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.189" endtime="20230615 15:26:19.190"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>downloading: ${attachment}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.190" endtime="20230615 15:26:19.191"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;.xlsx&quot; in &quot;${attachment.FileName}&quot; or &quot;.zip&quot; in &quot;${attachment.FileName}&quot;">
+<kw name="Download Attachments" library="emailFetchingPython">
+<arg>${attachment}</arg>
+<arg>${attachmentDownloadPath}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.192" endtime="20230615 15:26:19.193"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.192" endtime="20230615 15:26:19.193"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.192" endtime="20230615 15:26:19.193"/>
+</if>
+<status status="NOT RUN" starttime="20230615 15:26:19.189" endtime="20230615 15:26:19.194"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.188" endtime="20230615 15:26:19.194"/>
+</for>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.195" endtime="20230615 15:26:19.196"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.185" endtime="20230615 15:26:19.196"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' &gt; '1' and '${excelAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple zip files and excel files found in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.198" endtime="20230615 15:26:19.199"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple zip files and excel files found in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.199" endtime="20230615 15:26:19.200"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.200" endtime="20230615 15:26:19.201"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.201" endtime="20230615 15:26:19.201"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.196" endtime="20230615 15:26:19.203"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple zip files in the email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.204" endtime="20230615 15:26:19.204"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple zip files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.204" endtime="20230615 15:26:19.204"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.205" endtime="20230615 15:26:19.205"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.205" endtime="20230615 15:26:19.205"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.203" endtime="20230615 15:26:19.205"/>
+</branch>
+<branch type="ELSE IF" condition="'${excelAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple excel files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.206" endtime="20230615 15:26:19.206"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple excel files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.206" endtime="20230615 15:26:19.207"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.207" endtime="20230615 15:26:19.207"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.207" endtime="20230615 15:26:19.208"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.206" endtime="20230615 15:26:19.208"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' == '0' and '${excelAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No zip files and excel files found in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.208" endtime="20230615 15:26:19.209"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No zip files and excel files found in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.209" endtime="20230615 15:26:19.209"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.210" endtime="20230615 15:26:19.210"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.210" endtime="20230615 15:26:19.211"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.208" endtime="20230615 15:26:19.211"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No zip files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.221" endtime="20230615 15:26:19.221"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No zip files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.222" endtime="20230615 15:26:19.223"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.224" endtime="20230615 15:26:19.225"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.226" endtime="20230615 15:26:19.226"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.218" endtime="20230615 15:26:19.227"/>
+</branch>
+<branch type="ELSE IF" condition="'${excelAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No excel files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.227" endtime="20230615 15:26:19.228"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No excel files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.229" endtime="20230615 15:26:19.230"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.232" endtime="20230615 15:26:19.234"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.236" endtime="20230615 15:26:19.237"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.227" endtime="20230615 15:26:19.237"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.185" endtime="20230615 15:26:19.238"/>
+</if>
+<status status="NOT RUN" starttime="20230615 15:26:19.155" endtime="20230615 15:26:19.239"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.154" endtime="20230615 15:26:19.239"/>
+</for>
+<kw name="Quit Application" library="RPA.Outlook.Application">
+<doc>Quit the application.</doc>
+<status status="PASS" starttime="20230615 15:26:19.240" endtime="20230615 15:26:19.241"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.538" endtime="20230615 15:26:19.242"/>
+</iter>
+<iter>
+<var name="${subject}">marketing petty</var>
+<kw name="Fetch Email Based On Subject" library="emailFetchingPython">
+<var>${filteredEmails}</var>
+<arg>${subject}</arg>
+<arg>${duration}</arg>
+<arg>${startTimeInSeconds}</arg>
+<msg timestamp="20230615 15:26:19.309" level="INFO">${filteredEmails} = []</msg>
+<status status="PASS" starttime="20230615 15:26:19.243" endtime="20230615 15:26:19.310"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${emailLength}</var>
+<arg>${filteredEmails}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:26:19.316" level="INFO">Length is 0</msg>
+<msg timestamp="20230615 15:26:19.317" level="INFO">${emailLength} = 0</msg>
+<status status="PASS" starttime="20230615 15:26:19.311" endtime="20230615 15:26:19.317"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nSearching for email with subject : ${subject}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.318" endtime="20230615 15:26:19.322"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Searching for email with subject : ${subject}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:19.324" level="INFO">Searching for email with subject : marketing petty</msg>
+<status status="PASS" starttime="20230615 15:26:19.323" endtime="20230615 15:26:19.325"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nTotal email with given subject is: ${emailLength}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.325" endtime="20230615 15:26:19.327"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Total email with given subject is: ${emailLength}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:19.330" level="INFO">Total email with given subject is: 0</msg>
+<status status="PASS" starttime="20230615 15:26:19.327" endtime="20230615 15:26:19.333"/>
+</kw>
+<kw name="Get Init Details" library="MyLibrary">
+<var>${attachmentDownloadFolder}</var>
+<msg timestamp="20230615 15:26:19.336" level="INFO">${attachmentDownloadFolder} = D:\MalabarProjectGit</msg>
+<status status="PASS" starttime="20230615 15:26:19.335" endtime="20230615 15:26:19.337"/>
+</kw>
+<for flavor="IN">
+<var>${email}</var>
+<value>@{filteredEmails}</value>
+<iter>
+<var name="${email}"/>
+<kw name="Find Sender Email" library="emailFetchingPython">
+<var>${senderId}</var>
+<arg>${email}</arg>
+<doc>collect sender emailid from email</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.339" endtime="20230615 15:26:19.339"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Email subject from collected mail is: ${email.Subject}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.339" endtime="20230615 15:26:19.341"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>mail seder id : ${senderId}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.341" endtime="20230615 15:26:19.342"/>
+</kw>
+<kw name="Email Sending Time" library="emailFetchingPython">
+<var>${sendingTime}</var>
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.342" endtime="20230615 15:26:19.343"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>'${sendingTime}'</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.343" endtime="20230615 15:26:19.344"/>
+</kw>
+<kw name="Get Email Attachment Count" library="emailFetchingPy">
+<var>${attachmentCount}</var>
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.344" endtime="20230615 15:26:19.345"/>
+</kw>
+<if>
+<branch type="IF" condition="${attachmentCount} &gt; 0">
+<for flavor="IN RANGE">
+<var>${index}</var>
+<value>${attachmentCount}</value>
+<iter>
+<var name="${index}"/>
+<kw name="Get Email Attachments Name" library="emailFetchingPy">
+<var>${attachmentNames}</var>
+<arg>${email}</arg>
+<arg>${index}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.349" endtime="20230615 15:26:19.351"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.348" endtime="20230615 15:26:19.352"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.346" endtime="20230615 15:26:19.352"/>
+</for>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${attachmentNames}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.354" endtime="20230615 15:26:19.355"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.345" endtime="20230615 15:26:19.355"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.345" endtime="20230615 15:26:19.355"/>
+</if>
+<if>
+<branch type="IF" condition="${attachmentCount} == 0">
+<kw name="Log" library="BuiltIn">
+<arg>the email doesnot containing any attachments</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.356" endtime="20230615 15:26:19.358"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: The email doesn't containing any attachments</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.358" endtime="20230615 15:26:19.359"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.359" endtime="20230615 15:26:19.360"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.360" endtime="20230615 15:26:19.361"/>
+</kw>
+<kw name="Continue For Loop" library="BuiltIn">
+<doc>Skips the current FOR loop iteration and continues from the next.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.361" endtime="20230615 15:26:19.362"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.356" endtime="20230615 15:26:19.365"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.356" endtime="20230615 15:26:19.366"/>
+</if>
+<kw name="Check Attachments With Multiple Excel" library="emailFetchingPython">
+<var>${excelFileList}</var>
+<arg>${attachmentNames}</arg>
+<doc>check number of excel files in email attachments</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.368" endtime="20230615 15:26:19.368"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${excelAttachmentLength}</var>
+<arg>${excelFileList}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.369" endtime="20230615 15:26:19.369"/>
+</kw>
+<kw name="Check Attachments With Multiple Zip" library="emailFetchingPython">
+<var>${zipFileList}</var>
+<arg>${attachmentNames}</arg>
+<doc>check number of  files in email attachments</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.370" endtime="20230615 15:26:19.371"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${zipAttachmentLEngth}</var>
+<arg>${zipFileList}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.371" endtime="20230615 15:26:19.372"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>excel attachments is: ${excelFileList}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.372" endtime="20230615 15:26:19.373"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>excel attachments is: ${excelFileList}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.374" endtime="20230615 15:26:19.374"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>zip attachments is: ${zipFileList}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.375" endtime="20230615 15:26:19.375"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>zip attachments is: ${zipFileList}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.376" endtime="20230615 15:26:19.376"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${sendingTime}</var>
+<arg>${sendingTime}</arg>
+<arg>:</arg>
+<arg>-</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.377" endtime="20230615 15:26:19.377"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${senderId_sendingTime}</var>
+<arg>${senderId}_</arg>
+<arg>${sendingTime}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.378" endtime="20230615 15:26:19.385"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${attachmentDownloadPath}</var>
+<arg>${attachmentDownloadFolder}${/}InputFolder${/}${senderId_sendingTime}${/}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.386" endtime="20230615 15:26:19.387"/>
+</kw>
+<if>
+<branch type="IF" condition="'${excelAttachmentLength}' == '1' and '${zipAttachmentLength}' == '1'">
+<kw name="Log To Console" library="BuiltIn">
+<arg>excel attachment length is 1 and zip attachment length is 1</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.390" endtime="20230615 15:26:19.391"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>excel attachment length is 1 and zip attachment length is 1</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.392" endtime="20230615 15:26:19.392"/>
+</kw>
+<for flavor="IN">
+<var>${attachment}</var>
+<value>@{email.Attachments}</value>
+<iter>
+<var name="${attachment}"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>downloading: ${attachment.FileName}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.428" endtime="20230615 15:26:19.430"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>downloading: ${attachment}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.433" endtime="20230615 15:26:19.435"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;.xlsx&quot; in &quot;${attachment.FileName}&quot; or &quot;.zip&quot; in &quot;${attachment.FileName}&quot;">
+<kw name="Download Attachments" library="emailFetchingPython">
+<arg>${attachment}</arg>
+<arg>${attachmentDownloadPath}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.437" endtime="20230615 15:26:19.437"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.436" endtime="20230615 15:26:19.437"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.436" endtime="20230615 15:26:19.438"/>
+</if>
+<status status="NOT RUN" starttime="20230615 15:26:19.427" endtime="20230615 15:26:19.438"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.392" endtime="20230615 15:26:19.438"/>
+</for>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.439" endtime="20230615 15:26:19.439"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.388" endtime="20230615 15:26:19.440"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' &gt; '1' and '${excelAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple zip files and excel files found in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.441" endtime="20230615 15:26:19.442"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple zip files and excel files found in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.442" endtime="20230615 15:26:19.442"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.443" endtime="20230615 15:26:19.443"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.444" endtime="20230615 15:26:19.444"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.440" endtime="20230615 15:26:19.445"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple zip files in the email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.448" endtime="20230615 15:26:19.450"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple zip files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.450" endtime="20230615 15:26:19.450"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.451" endtime="20230615 15:26:19.451"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.452" endtime="20230615 15:26:19.452"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.445" endtime="20230615 15:26:19.468"/>
+</branch>
+<branch type="ELSE IF" condition="'${excelAttachmentLength}' &gt; '1'">
+<kw name="Log" library="BuiltIn">
+<arg>Multiple excel files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.470" endtime="20230615 15:26:19.470"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: Multiple excel files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.471" endtime="20230615 15:26:19.472"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.472" endtime="20230615 15:26:19.473"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.476" endtime="20230615 15:26:19.477"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.469" endtime="20230615 15:26:19.478"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' == '0' and '${excelAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No zip files and excel files found in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.479" endtime="20230615 15:26:19.484"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No zip files and excel files found in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.494" endtime="20230615 15:26:19.495"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.497" endtime="20230615 15:26:19.500"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.503" endtime="20230615 15:26:19.504"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.478" endtime="20230615 15:26:19.504"/>
+</branch>
+<branch type="ELSE IF" condition="'${zipAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No zip files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.506" endtime="20230615 15:26:19.506"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No zip files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.507" endtime="20230615 15:26:19.509"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.511" endtime="20230615 15:26:19.512"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.512" endtime="20230615 15:26:19.519"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.505" endtime="20230615 15:26:19.520"/>
+</branch>
+<branch type="ELSE IF" condition="'${excelAttachmentLength}' == '0'">
+<kw name="Log" library="BuiltIn">
+<arg>No excel files in email</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.521" endtime="20230615 15:26:19.522"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${mailSubject}</var>
+<arg>Alert: No excel files in email</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.523" endtime="20230615 15:26:19.523"/>
+</kw>
+<kw name="send mail if exception occures" library="emailFetchingPy">
+<arg>${senderId}</arg>
+<arg>${mailSubject}</arg>
+<arg>${sendingTime}</arg>
+<arg>${email.Subject}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.525" endtime="20230615 15:26:19.525"/>
+</kw>
+<kw name="Mark Unread Email As Read" library="emailFetchingPython">
+<arg>${email}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.526" endtime="20230615 15:26:19.527"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.520" endtime="20230615 15:26:19.527"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:26:19.388" endtime="20230615 15:26:19.528"/>
+</if>
+<status status="NOT RUN" starttime="20230615 15:26:19.338" endtime="20230615 15:26:19.528"/>
+</iter>
+<status status="NOT RUN" starttime="20230615 15:26:19.337" endtime="20230615 15:26:19.528"/>
+</for>
+<kw name="Quit Application" library="RPA.Outlook.Application">
+<doc>Quit the application.</doc>
+<status status="PASS" starttime="20230615 15:26:19.529" endtime="20230615 15:26:19.533"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:19.242" endtime="20230615 15:26:19.534"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:18.537" endtime="20230615 15:26:19.535"/>
+</for>
+<status status="PASS" starttime="20230615 15:26:18.489" endtime="20230615 15:26:19.536"/>
+</kw>
+<msg timestamp="20230615 15:26:19.536" level="INFO">${mail_status} = True</msg>
+<status status="PASS" starttime="20230615 15:26:18.488" endtime="20230615 15:26:19.539"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:18.487" endtime="20230615 15:26:19.540"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:18.486" endtime="20230615 15:26:19.540"/>
+</if>
+<if>
+<branch type="IF" condition="${mail_status} == $True">
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${DB_upload_Status}</var>
+<arg>processing each folders</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="processing each folders" library="VoucherDataExtraction">
+<kw name="Get Init Details" library="MyLibrary">
+<var>${path}</var>
+<msg timestamp="20230615 15:26:19.555" level="INFO">${path} = D:\MalabarProjectGit</msg>
+<status status="PASS" starttime="20230615 15:26:19.553" endtime="20230615 15:26:19.555"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${temp_path}</var>
+<arg>${path}${CONFIG['RootFolder']}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230615 15:26:19.559" level="INFO">${temp_path} = D:\MalabarProjectGit\InputFolder\</msg>
+<status status="PASS" starttime="20230615 15:26:19.556" endtime="20230615 15:26:19.560"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${proccessed_folder}</var>
+<arg>${path}${CONFIG['Processfolder']}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230615 15:26:19.566" level="INFO">${proccessed_folder} = D:\MalabarProjectGit\ProccessedFolder\</msg>
+<status status="PASS" starttime="20230615 15:26:19.560" endtime="20230615 15:26:19.566"/>
+</kw>
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${input_folders}</var>
+<arg>${temp_path}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:19.583" level="INFO">${input_folders} = [Directory(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42', name='abhijith.p@quadance.com_ 2023-06-15 13-13-42')]</msg>
+<status status="PASS" starttime="20230615 15:26:19.567" endtime="20230615 15:26:19.584"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${count}</var>
+<arg>${input_folders}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:26:19.586" level="INFO">Length is 1</msg>
+<msg timestamp="20230615 15:26:19.589" level="INFO">${count} = 1</msg>
+<status status="PASS" starttime="20230615 15:26:19.585" endtime="20230615 15:26:19.592"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>total folder in input fodler: ${count}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:19.595" level="INFO">total folder in input fodler: 1</msg>
+<status status="PASS" starttime="20230615 15:26:19.593" endtime="20230615 15:26:19.595"/>
+</kw>
+<for flavor="IN">
+<var>${folder}</var>
+<value>@{input_folders}</value>
+<iter>
+<var name="${folder}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Current processing foler: ${folder}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.601" endtime="20230615 15:26:19.604"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${folder}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:19.607" level="INFO">${folder} = D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:26:19.605" endtime="20230615 15:26:19.608"/>
+</kw>
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${mail_id}</var>
+<arg>${folder}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:26:19.610" level="INFO">${mail_id} = abhijith.p@quadance.com_ 2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:26:19.608" endtime="20230615 15:26:19.610"/>
+</kw>
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${Excel_files}</var>
+<arg>${folder}</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:19.621" level="INFO">${Excel_files} = [File(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\input_47.xlsx', name='input_47.xlsx', size=21108, mtime=1686822933.0360067)]</msg>
+<status status="PASS" starttime="20230615 15:26:19.612" endtime="20230615 15:26:19.621"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${file_count}</var>
+<arg>${Excel_files}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:26:19.624" level="INFO">Length is 1</msg>
+<msg timestamp="20230615 15:26:19.625" level="INFO">${file_count} = 1</msg>
+<status status="PASS" starttime="20230615 15:26:19.622" endtime="20230615 15:26:19.625"/>
+</kw>
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>'${file_count}' == '0'</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20230615 15:26:19.627" endtime="20230615 15:26:19.628"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${run_required}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:19.637" level="INFO">${run_required} = True</msg>
+<status status="PASS" starttime="20230615 15:26:19.636" endtime="20230615 15:26:19.638"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${run_required}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:19.640" level="INFO">${run_required} = True</msg>
+<status status="PASS" starttime="20230615 15:26:19.639" endtime="20230615 15:26:19.640"/>
+</kw>
+<kw name="Get the excel file and zip file" library="VoucherDataExtraction">
+<var>${run_required}</var>
+<arg>${Excel_files}</arg>
+<arg>${folder}</arg>
+<for flavor="IN">
+<var>${file}</var>
+<value>@{Excel_files}</value>
+<iter>
+<var name="${file}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\input_47.xlsx</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension_xl}</var>
+<arg>${file}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:26:19.645" level="INFO">${extension_xl} = .xlsx</msg>
+<status status="PASS" starttime="20230615 15:26:19.643" endtime="20230615 15:26:19.645"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension_xl}' == '.xlsx'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${input_excel_path}</var>
+<arg>${file}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:19.653" level="INFO">${input_excel_path} = D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\input_47.xlsx</msg>
+<status status="PASS" starttime="20230615 15:26:19.651" endtime="20230615 15:26:19.654"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${input_excel_path}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:19.655" level="INFO">${input_excel_path} = D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\input_47.xlsx</msg>
+<status status="PASS" starttime="20230615 15:26:19.654" endtime="20230615 15:26:19.656"/>
+</kw>
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${folder_name}</var>
+<arg>${folder}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:26:19.658" level="INFO">${folder_name} = abhijith.p@quadance.com_ 2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:26:19.656" endtime="20230615 15:26:19.659"/>
+</kw>
+<kw name="collect email id from folder name" library="VoucherDataExtraction">
+<var>${mail_id}</var>
+<arg>${folder_name}</arg>
+<kw name="Split String" library="String">
+<var>${splitResult}</var>
+<arg>${folder_name}</arg>
+<arg>_</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<msg timestamp="20230615 15:26:19.665" level="INFO">${splitResult} = ['abhijith.p@quadance.com', ' 2023-06-15 13-13-42']</msg>
+<status status="PASS" starttime="20230615 15:26:19.661" endtime="20230615 15:26:19.666"/>
+</kw>
+<kw name="Remove From List" library="Collections">
+<var>${last_item}</var>
+<arg>${splitResult}</arg>
+<arg>-1</arg>
+<doc>Removes and returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20230615 15:26:19.669" level="INFO">${last_item} =  2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:26:19.667" endtime="20230615 15:26:19.670"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${mail_id}</var>
+<arg>''.join(${splitResult})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230615 15:26:19.671" level="INFO">${mail_id} = abhijith.p@quadance.com</msg>
+<status status="PASS" starttime="20230615 15:26:19.670" endtime="20230615 15:26:19.672"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Mail id is: ${mail_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:19.672" endtime="20230615 15:26:19.674"/>
+</kw>
+<return>
+<value>${mail_id}</value>
+<status status="PASS" starttime="20230615 15:26:19.675" endtime="20230615 15:26:19.676"/>
+</return>
+<msg timestamp="20230615 15:26:19.677" level="INFO">${mail_id} = abhijith.p@quadance.com</msg>
+<status status="PASS" starttime="20230615 15:26:19.659" endtime="20230615 15:26:19.677"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${mail_id}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:19.679" level="INFO">${mail_id} = abhijith.p@quadance.com</msg>
+<status status="PASS" starttime="20230615 15:26:19.678" endtime="20230615 15:26:19.682"/>
+</kw>
+<kw name="Read Horizontaldata" library="update_exceltoDB">
+<var>${legal_entity_code}</var>
+<var>${cost_center_code}</var>
+<var>${emp_code}</var>
+<var>${interior_code}</var>
+<var>${work_code}</var>
+<arg>${input_excel_path}</arg>
+<doc>This function is used to read the constant data of each input sheet that is the data that een in the top of all input sheets
+get all data and return that for further process</doc>
+<msg timestamp="20230615 15:26:19.801" level="INFO">${legal_entity_code} = KPMG</msg>
+<msg timestamp="20230615 15:26:19.803" level="INFO">${cost_center_code} = 123</msg>
+<msg timestamp="20230615 15:26:19.803" level="INFO">${emp_code} = 34436</msg>
+<msg timestamp="20230615 15:26:19.804" level="INFO">${interior_code} = 1234</msg>
+<msg timestamp="20230615 15:26:19.804" level="INFO">${work_code} = SGCL-PRJ-00285</msg>
+<status status="PASS" starttime="20230615 15:26:19.685" endtime="20230615 15:26:19.804"/>
+</kw>
+<kw name="check_empty_horizontaldata" library="VoucherDataExtraction">
+<var>${empty_primary_data}</var>
+<var>${comments}</var>
+<arg>${legal_entity_code}</arg>
+<arg>${cost_center_code}</arg>
+<arg>${emp_code}</arg>
+<arg>${interior_code}</arg>
+<arg>${work_code}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:19.808" level="INFO">${empty_primary_data} = True</msg>
+<status status="PASS" starttime="20230615 15:26:19.808" endtime="20230615 15:26:19.809"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>missing item :</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:19.810" level="INFO">${comments} = missing item :</msg>
+<status status="PASS" starttime="20230615 15:26:19.809" endtime="20230615 15:26:19.810"/>
+</kw>
+<if>
+<branch type="IF" condition="'${legal_entity_code}' == 'Not found'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>${comments}legal entity name is missing,</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.812" endtime="20230615 15:26:19.812"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.812" endtime="20230615 15:26:19.814"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.810" endtime="20230615 15:26:19.815"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.810" endtime="20230615 15:26:19.816"/>
+</if>
+<if>
+<branch type="IF" condition="'${cost_center_code}' == 'Not found'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>${comments}cost center code name is missing,</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.820" endtime="20230615 15:26:19.821"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.821" endtime="20230615 15:26:19.822"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.818" endtime="20230615 15:26:19.823"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.817" endtime="20230615 15:26:19.823"/>
+</if>
+<if>
+<branch type="IF" condition="'${emp_code}' == 'Not found'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>${comments}emp code name is missing,</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.825" endtime="20230615 15:26:19.825"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.826" endtime="20230615 15:26:19.827"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.824" endtime="20230615 15:26:19.827"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.823" endtime="20230615 15:26:19.828"/>
+</if>
+<if>
+<branch type="IF" condition="'${interior_code}' == 'Not found'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>${comments}interior code name is missing,</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.829" endtime="20230615 15:26:19.829"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.831" endtime="20230615 15:26:19.831"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.829" endtime="20230615 15:26:19.831"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.828" endtime="20230615 15:26:19.831"/>
+</if>
+<if>
+<branch type="IF" condition="'${work_code}' == 'Not found'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>${comments}work code name is missing,</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.833" endtime="20230615 15:26:19.834"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${empty_primary_data}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.835" endtime="20230615 15:26:19.838"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:19.832" endtime="20230615 15:26:19.839"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.831" endtime="20230615 15:26:19.839"/>
+</if>
+<return>
+<value>${empty_primary_data}</value>
+<value>${comments}</value>
+<status status="PASS" starttime="20230615 15:26:19.840" endtime="20230615 15:26:19.840"/>
+</return>
+<msg timestamp="20230615 15:26:19.841" level="INFO">${empty_primary_data} = True</msg>
+<msg timestamp="20230615 15:26:19.841" level="INFO">${comments} = missing item :</msg>
+<status status="PASS" starttime="20230615 15:26:19.805" endtime="20230615 15:26:19.841"/>
+</kw>
+<if>
+<branch type="IF" condition="${empty_primary_data} != $True">
+<kw name="Set Variable" library="BuiltIn">
+<var>${subject}</var>
+<arg>Alert: Missing mandatory Fields in excel file</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.843" endtime="20230615 15:26:19.843"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>Hi Team, \n\nplease find the attached excel file that not containining expected data fields.\n${comments}.\n\nThank you,\nBot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.844" endtime="20230615 15:26:19.844"/>
+</kw>
+<kw name="send mail with excel report" library="emailFetchingPy">
+<arg>${mail_id}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.844" endtime="20230615 15:26:19.844"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${run_required}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.845" endtime="20230615 15:26:19.845"/>
+</kw>
+<return>
+<value>${run_required}</value>
+<status status="NOT RUN" starttime="20230615 15:26:19.845" endtime="20230615 15:26:19.845"/>
+</return>
+<status status="NOT RUN" starttime="20230615 15:26:19.842" endtime="20230615 15:26:19.846"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.842" endtime="20230615 15:26:19.846"/>
+</if>
+<kw name="Check Excel Headers" library="excelFileFormatCheck">
+<var>${excel_format}</var>
+<arg>${input_excel_path}</arg>
+<doc>Check Excel file format before processing</doc>
+<msg timestamp="20230615 15:26:19.973" level="INFO">voucher_number
+date
+expense_category
+type
+issued_to
+description
+debit
+credit
+closing_balance
+['voucher_number', 'date', 'expense_category', 'type', 'issued_to', 'description', 'debit', 'credit', 'closing_balance']
+All headers matched successfully</msg>
+<msg timestamp="20230615 15:26:19.974" level="INFO">${excel_format} = match</msg>
+<status status="PASS" starttime="20230615 15:26:19.846" endtime="20230615 15:26:19.974"/>
+</kw>
+<if>
+<branch type="IF" condition="'${excel_format}' == 'no_match'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${Mailsubject}</var>
+<arg>input data sheet template is not correct</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.976" endtime="20230615 15:26:19.976"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${subject}</var>
+<arg>Alert: Missing mandatory columns in excel file</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.977" endtime="20230615 15:26:19.977"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>Hi Team, \n\nplease find the attached excel file that not containining expected columns.\n\nThank you,\nBot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.978" endtime="20230615 15:26:19.978"/>
+</kw>
+<kw name="send mail with excel report" library="emailFetchingPy">
+<arg>${mail_id}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:19.979" endtime="20230615 15:26:19.981"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>send mail- excel column format mismatch</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.983" endtime="20230615 15:26:19.983"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${run_required}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:19.984" endtime="20230615 15:26:19.985"/>
+</kw>
+<return>
+<value>${run_required}</value>
+<status status="NOT RUN" starttime="20230615 15:26:19.985" endtime="20230615 15:26:19.986"/>
+</return>
+<status status="NOT RUN" starttime="20230615 15:26:19.975" endtime="20230615 15:26:19.986"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.975" endtime="20230615 15:26:19.986"/>
+</if>
+<kw name="Create Columns" library="update_exceltoDB">
+<arg>${input_excel_path}</arg>
+<status status="PASS" starttime="20230615 15:26:19.987" endtime="20230615 15:26:20.391"/>
+</kw>
+<kw name="Duplication Checking Process" library="update_exceltoDB">
+<arg>${input_excel_path}</arg>
+<arg>${legal_entity_code}</arg>
+<doc>this is the main function used to check for duplication and inside from this function another functions were called those are written just above 
+from here.
+LE = legal entity name (eg: MGPP)</doc>
+<msg timestamp="20230615 15:26:23.018" level="INFO">KPMG_JLR-MV113
+Update successful.
+KPMG_JLR-MV114
+Update successful.</msg>
+<status status="PASS" starttime="20230615 15:26:20.392" endtime="20230615 15:26:23.019"/>
+</kw>
+<kw name="Upload Input Values DB" library="update_exceltoDB">
+<var>${no_data_in_df}</var>
+<var>${inputdata_uploaded}</var>
+<var>${voucherNo_empty}</var>
+<arg>${legal_entity_code}</arg>
+<arg>${cost_center_code}</arg>
+<arg>${emp_code}</arg>
+<arg>${interior_code}</arg>
+<arg>${work_code}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${engine_str}</arg>
+<arg>${mail_id}</arg>
+<doc>Uploading the input sheet values to the database
+Also, update the status column value to New during the uploading time and this new status is need to fetch unprocessed data from DB
+Legal entity, cost center code, interior code, work code,emp code will be adding to each row items
+there may chance to empty voucher columns occur for credit row such case bot remove that column 
+if any of the voucher number is empty then we get that message through 'voucherNo_empty' variable if it's invalid that means there are rows with empty voucher number</doc>
+<msg timestamp="20230615 15:26:23.163" level="INFO">there is data after removing duplicated items from dataframe.</msg>
+<msg timestamp="20230615 15:26:23.163" level="INFO">${no_data_in_df} = False</msg>
+<msg timestamp="20230615 15:26:23.164" level="INFO">${inputdata_uploaded} = True</msg>
+<msg timestamp="20230615 15:26:23.164" level="INFO">${voucherNo_empty} = None</msg>
+<status status="PASS" starttime="20230615 15:26:23.023" endtime="20230615 15:26:23.164"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${legal_entity_code}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:23.166" level="INFO">${legal_entity_code} = KPMG</msg>
+<status status="PASS" starttime="20230615 15:26:23.166" endtime="20230615 15:26:23.166"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>No data in dataframe after removing duplicates :${no_data_in_df}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:23.167" endtime="20230615 15:26:23.168"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Data upload to DB: ${inputdata_uploaded}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:23.168" endtime="20230615 15:26:23.169"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>No data in dataframe after removing duplicates :${no_data_in_df}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:23.171" level="INFO">No data in dataframe after removing duplicates :False</msg>
+<status status="PASS" starttime="20230615 15:26:23.169" endtime="20230615 15:26:23.171"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Data upload to DB: ${inputdata_uploaded}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:23.172" level="INFO">Data upload to DB: True</msg>
+<status status="PASS" starttime="20230615 15:26:23.171" endtime="20230615 15:26:23.172"/>
+</kw>
+<if>
+<branch type="IF" condition="${no_data_in_df} == $True">
+<kw name="Log" library="BuiltIn">
+<arg>Failed to upload input file to db</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.176" endtime="20230615 15:26:23.177"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${subject}</var>
+<arg>Alert: Duplicate Data found.</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.177" endtime="20230615 15:26:23.177"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>Hi, \nUnable to continue running with this input data as all the data from the input files has already been stored in the database.\n\nThank you,\nBot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.177" endtime="20230615 15:26:23.178"/>
+</kw>
+<kw name="send mail with excel report" library="emailFetchingPy">
+<arg>${mail_id}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:23.178" endtime="20230615 15:26:23.178"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${run_required}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.178" endtime="20230615 15:26:23.179"/>
+</kw>
+<return>
+<value>${run_required}</value>
+<status status="NOT RUN" starttime="20230615 15:26:23.179" endtime="20230615 15:26:23.179"/>
+</return>
+<status status="NOT RUN" starttime="20230615 15:26:23.176" endtime="20230615 15:26:23.179"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.172" endtime="20230615 15:26:23.179"/>
+</if>
+<if>
+<branch type="IF" condition="'${voucherNo_empty}' == 'invalid'">
+<kw name="Log To Console" library="BuiltIn">
+<arg>voucher number is missing in one of the rows</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.182" endtime="20230615 15:26:23.183"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>voucher number is missing in one of the rows</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.183" endtime="20230615 15:26:23.183"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.184" endtime="20230615 15:26:23.184"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:23.181" endtime="20230615 15:26:23.184"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.180" endtime="20230615 15:26:23.184"/>
+</if>
+<if>
+<branch type="IF" condition="${inputdata_uploaded} == True">
+<kw name="Log To Console" library="BuiltIn">
+<arg>Sucessfully completed DB updation</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:23.185" endtime="20230615 15:26:23.185"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:23.184" endtime="20230615 15:26:23.186"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log To Console" library="BuiltIn">
+<arg>Failed to upload input file to db</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.187" endtime="20230615 15:26:23.187"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Failed to upload input file to db</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.187" endtime="20230615 15:26:23.187"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${subject}</var>
+<arg>Alert: Database updation failed.</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.188" endtime="20230615 15:26:23.188"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>Hi, \n\nCurrently unable to update data to database due to technical error Please fix that.\n\nThank you,\nBot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.188" endtime="20230615 15:26:23.189"/>
+</kw>
+<kw name="send mail with excel report" library="emailFetchingPy">
+<arg>${systemadminMailId}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<status status="NOT RUN" starttime="20230615 15:26:23.189" endtime="20230615 15:26:23.190"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${run_required}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.190" endtime="20230615 15:26:23.190"/>
+</kw>
+<return>
+<value>${run_required}</value>
+<status status="NOT RUN" starttime="20230615 15:26:23.190" endtime="20230615 15:26:23.191"/>
+</return>
+<status status="NOT RUN" starttime="20230615 15:26:23.186" endtime="20230615 15:26:23.191"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.184" endtime="20230615 15:26:23.191"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:19.651" endtime="20230615 15:26:23.191"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.650" endtime="20230615 15:26:23.191"/>
+</if>
+<if>
+<branch type="IF" condition="'${extension_xl}' == '.zip'">
+<kw name="Log" library="BuiltIn">
+<arg>zip file is extracted: ${file}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.192" endtime="20230615 15:26:23.192"/>
+</kw>
+<kw name="Extract Archive" library="RPA.Archive">
+<arg>${file}</arg>
+<arg>${folder}</arg>
+<doc>Extract files from archive into local directory</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.193" endtime="20230615 15:26:23.193"/>
+</kw>
+<kw name="Remove File" library="RPA.FileSystem">
+<arg>${file}</arg>
+<doc>Removes the given file.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.193" endtime="20230615 15:26:23.193"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:23.192" endtime="20230615 15:26:23.194"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.192" endtime="20230615 15:26:23.194"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:19.642" endtime="20230615 15:26:23.194"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:19.641" endtime="20230615 15:26:23.194"/>
+</for>
+<msg timestamp="20230615 15:26:23.195" level="INFO">${run_required} = None</msg>
+<status status="PASS" starttime="20230615 15:26:19.640" endtime="20230615 15:26:23.195"/>
+</kw>
+<kw name="Continue For Loop If" library="BuiltIn">
+<arg>${run_required} == $False</arg>
+<doc>Skips the current FOR loop iteration if the ``condition`` is true.</doc>
+<status status="PASS" starttime="20230615 15:26:23.195" endtime="20230615 15:26:23.197"/>
+</kw>
+<kw name="Fetching each row from DatabaseProcess" library="VoucherDataExtraction">
+<arg>${folder}</arg>
+<kw name="Read Data From Database" library="update_exceltoDB">
+<var>${input_data_table}</var>
+<arg>${engine_str}</arg>
+<doc>This is used to fetch data from database having status columns New
+then all sorted data is returned based on the legal entity.</doc>
+<msg timestamp="20230615 15:26:23.252" level="INFO">${input_data_table} = [{'voucher_legalentity': 'KPMG_JLR-MV113', 'voucher_number': 'JLR-MV113', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Travelling Food &amp; Accommodation Expense', 'issued...</msg>
+<status status="PASS" starttime="20230615 15:26:23.202" endtime="20230615 15:26:23.253"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${input_data_table}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:26:23.254" level="INFO">[{'voucher_legalentity': 'KPMG_JLR-MV113', 'voucher_number': 'JLR-MV113', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Travelling Food &amp; Accommodation Expense', 'issued_To': 'Poonam (37559)', 'description': 'Marketing Traveling and food expense paid for the dates 10.12.2022 to 18.12.2022 rs.1730', 'debit': 1730.0, 'credit': None, 'closing_balance': '555', 'cost_center_code': '123', 'emp_code': '34436', 'interior_code': '1234', 'work_code': 'SGCL-PRJ-00285', 'run_status': None, 'mail_id': 'abhijith.p@quadance.com', 'mail_sent': 0, 'status': 'New', 'comments': None, 'inserted_date': Timestamp('2023-06-15 15:26:23'), 'prefix': 'KPMG'}, {'voucher_legalentity': 'KPMG_JLR-MV114', 'voucher_number': 'JLR-MV114', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Marketing Expense', 'issued_To': 'Poonam (37559)', 'description': 'purchased cake for customer wedding anniversary rs.350', 'debit': 350.0, 'credit': None, 'closing_balance': '12000', 'cost_center_code': '123', 'emp_code': '34436', 'interior_code': '1234', 'work_code': 'SGCL-PRJ-00285', 'run_status': None, 'mail_id': 'abhijith.p@quadance.com', 'mail_sent': 0, 'status': 'New', 'comments': None, 'inserted_date': Timestamp('2023-06-15 15:26:23'), 'prefix': 'KPMG'}]</msg>
+<status status="PASS" starttime="20230615 15:26:23.253" endtime="20230615 15:26:23.255"/>
+</kw>
+<for flavor="IN">
+<var>${input_data_table_element}</var>
+<value>@{input_data_table}</value>
+<iter>
+<var name="${input_data_table_element}">{'voucher_legalentity': 'KPMG_JLR-MV113', 'voucher_number': 'JLR-MV113', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Travelling Food &amp; Accommodation Expense', 'issued_...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${vr_no}</var>
+<arg>${input_data_table_element['voucher_number']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.258" level="INFO">${vr_no} = JLR-MV113</msg>
+<status status="PASS" starttime="20230615 15:26:23.256" endtime="20230615 15:26:23.258"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${voucher_legalentity}</var>
+<arg>${input_data_table_element['voucher_legalentity']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.260" level="INFO">${voucher_legalentity} = KPMG_JLR-MV113</msg>
+<status status="PASS" starttime="20230615 15:26:23.259" endtime="20230615 15:26:23.260"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${voucher_legalentity}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:26:23.260" level="INFO">${voucher_legalentity} = KPMG_JLR-MV113</msg>
+<status status="PASS" starttime="20230615 15:26:23.260" endtime="20230615 15:26:23.260"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${vr_name}</var>
+<arg>${vr_no}.pdf</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.261" level="INFO">${vr_name} = JLR-MV113.pdf</msg>
+<status status="PASS" starttime="20230615 15:26:23.261" endtime="20230615 15:26:23.261"/>
+</kw>
+<kw name="Find Matching PDF Files" library="VoucherDataExtraction">
+<var>${pdf_exist}</var>
+<arg>${folder}</arg>
+<arg>${vr_name}</arg>
+<arg>${input_data_table_element}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_exist}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.263" level="INFO">${pdf_exist} = False</msg>
+<status status="PASS" starttime="20230615 15:26:23.263" endtime="20230615 15:26:23.264"/>
+</kw>
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${folder}</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:23.268" level="INFO">${pdf_files} = [File(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\input_47.xlsx', name='input_47.xlsx', size=16616, mtime=1686822982.589064)]</msg>
+<status status="PASS" starttime="20230615 15:26:23.265" endtime="20230615 15:26:23.269"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${skip_subfolder}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.271" level="INFO">${skip_subfolder} = False</msg>
+<status status="PASS" starttime="20230615 15:26:23.269" endtime="20230615 15:26:23.271"/>
+</kw>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{pdf_files}</value>
+<iter>
+<var name="${element}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\input_47.xlsx</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension}</var>
+<arg>${element}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:26:23.274" level="INFO">${extension} = .xlsx</msg>
+<status status="PASS" starttime="20230615 15:26:23.273" endtime="20230615 15:26:23.275"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension}' == '.pdf'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${skip_subfolder}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.276" endtime="20230615 15:26:23.277"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.277" endtime="20230615 15:26:23.277"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:23.275" endtime="20230615 15:26:23.278"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.275" endtime="20230615 15:26:23.278"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:23.272" endtime="20230615 15:26:23.278"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:23.271" endtime="20230615 15:26:23.278"/>
+</for>
+<if>
+<branch type="IF" condition="${skip_subfolder} != $True">
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${sub_folders}</var>
+<arg>${folder}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:23.287" level="INFO">${sub_folders} = [Directory(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\JLR-MV134', name='JLR-MV134')]</msg>
+<status status="PASS" starttime="20230615 15:26:23.284" endtime="20230615 15:26:23.287"/>
+</kw>
+<for flavor="IN">
+<var>${sub_folder}</var>
+<value>@{sub_folders}</value>
+<iter>
+<var name="${sub_folder}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134</var>
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${filename}</var>
+<arg>${sub_folder}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:26:23.290" level="INFO">${filename} = JLR-MV134</msg>
+<status status="PASS" starttime="20230615 15:26:23.289" endtime="20230615 15:26:23.290"/>
+</kw>
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${zip_sub_folders}</var>
+<arg>${sub_folder}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:23.292" level="INFO">${zip_sub_folders} = []</msg>
+<status status="PASS" starttime="20230615 15:26:23.290" endtime="20230615 15:26:23.292"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${getlength}</var>
+<arg>${zip_sub_folders}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:26:23.294" level="INFO">Length is 0</msg>
+<msg timestamp="20230615 15:26:23.294" level="INFO">${getlength} = 0</msg>
+<status status="PASS" starttime="20230615 15:26:23.293" endtime="20230615 15:26:23.294"/>
+</kw>
+<if>
+<branch type="IF" condition="${getlength} &gt; 0">
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${zip_sub_folders}[0]</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.296" endtime="20230615 15:26:23.306"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>pdf file exist in the child folder of subfodler</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:23.307" endtime="20230615 15:26:23.307"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:23.295" endtime="20230615 15:26:23.307"/>
+</branch>
+<branch type="ELSE">
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${sub_folder}</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:26:23.313" level="INFO">${pdf_files} = [File(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\JLR-MV134\\JLR-MV113.pdf', name='JLR-MV113.pdf', size=785290, mtime=1686822253.5049736), File(path='D:\\Ma...</msg>
+<status status="PASS" starttime="20230615 15:26:23.308" endtime="20230615 15:26:23.315"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>pdf file exist in the sub folder</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:26:23.318" endtime="20230615 15:26:23.320"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:23.308" endtime="20230615 15:26:23.320"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.294" endtime="20230615 15:26:23.320"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:23.288" endtime="20230615 15:26:23.320"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:23.288" endtime="20230615 15:26:23.320"/>
+</for>
+<status status="PASS" starttime="20230615 15:26:23.280" endtime="20230615 15:26:23.321"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.279" endtime="20230615 15:26:23.321"/>
+</if>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{pdf_files}</value>
+<iter>
+<var name="${element}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV113.pdf</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension}</var>
+<arg>${element}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:26:23.324" level="INFO">${extension} = .pdf</msg>
+<status status="PASS" starttime="20230615 15:26:23.323" endtime="20230615 15:26:23.324"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension}' == '.pdf'">
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${pdf_file_name}</var>
+<arg>${element}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:26:23.326" level="INFO">${pdf_file_name} = JLR-MV113.pdf</msg>
+<status status="PASS" starttime="20230615 15:26:23.325" endtime="20230615 15:26:23.326"/>
+</kw>
+<if>
+<branch type="IF" condition="'${vr_name}' == '${pdf_file_name}'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_file_path}</var>
+<arg>${element}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.330" level="INFO">${pdf_file_path} = D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV113.pdf</msg>
+<status status="PASS" starttime="20230615 15:26:23.329" endtime="20230615 15:26:23.333"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_exist}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.336" level="INFO">${pdf_exist} = True</msg>
+<status status="PASS" starttime="20230615 15:26:23.334" endtime="20230615 15:26:23.336"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${azure_key}</var>
+<arg>${CONFIG}[SubscriptionKey]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.338" level="INFO">${azure_key} = 34729f664d044096bc9e06e162f7a47e</msg>
+<status status="PASS" starttime="20230615 15:26:23.337" endtime="20230615 15:26:23.338"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${endpoint}</var>
+<arg>${CONFIG}[EndPoint]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:26:23.339" level="INFO">${endpoint} = https://quadanceocrgroup.cognitiveservices.azure.com/</msg>
+<status status="PASS" starttime="20230615 15:26:23.339" endtime="20230615 15:26:23.340"/>
+</kw>
+<kw name="Sign Checking" library="signaturechecking">
+<var>${sign_status}</var>
+<arg>${pdf_file_path}</arg>
+<msg timestamp="20230615 15:26:39.715" level="INFO">Loading pretrained weights from url (https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-rsb-weights/resnet50_a1_0-14fe96d1.pth)</msg>
+<msg timestamp="20230615 15:26:59.743" level="INFO">&lt;class 'RPA.FileSystem.File'&gt;
+D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV113.pdf
+D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV113.pdf
+Looking for C:\Users\Q0042\.keras-ocr\craft_mlt_25k.h5
+Looking for C:\Users\Q0042\.keras-ocr\crnn_kurapan.h5
+Detected table with confidence 0.936 at location [380.44, 494.37, 4013.5, 2408.0]
+
+1/1 [==============================] - ETA: 0s
+1/1 [==============================] - 3s 3s/step
+
+1/1 [==============================] - ETA: 0s
+1/1 [==============================] - 1s 1s/step
+0.14038073025324688
+False</msg>
+<msg timestamp="20230615 15:26:59.747" level="INFO">${sign_status} = False</msg>
+<status status="PASS" starttime="20230615 15:26:23.340" endtime="20230615 15:26:59.747"/>
+</kw>
+<if>
+<branch type="IF" condition="'${sign_status}' == 'error'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.756" endtime="20230615 15:26:59.757"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'issues in signature detection ${vr_name}'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.758" endtime="20230615 15:26:59.758"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.759" endtime="20230615 15:26:59.759"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.760" endtime="20230615 15:26:59.760"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:59.752" endtime="20230615 15:26:59.760"/>
+</branch>
+<branch type="ELSE IF" condition="${sign_status} == $True">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.761" endtime="20230615 15:26:59.761"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'Duplicate signature detected'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.763" endtime="20230615 15:26:59.763"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.763" endtime="20230615 15:26:59.763"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:26:59.764" endtime="20230615 15:26:59.764"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:26:59.761" endtime="20230615 15:26:59.764"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:59.749" endtime="20230615 15:26:59.764"/>
+</if>
+<kw name="extracting voucher data from vouchers" library="DocExtractAndDBUpddate">
+<var>${voucherData}</var>
+<arg>${pdf_file_path}</arg>
+<arg>${endpoint}</arg>
+<arg>${azure_key}</arg>
+<kw name="Extract Voucher Data" library="voucherExtraction">
+<var>${voucherData}</var>
+<arg>${input_File}</arg>
+<arg>${endpoint}</arg>
+<arg>${azure_key}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${legal_entity_code}</arg>
+<doc>for extracting voucher data from voucher and returning voucher data as a dictionary.</doc>
+<msg timestamp="20230615 15:27:35.962" level="INFO">exception is :Operation returned an invalid status code 'PermissionDenied'</msg>
+<msg timestamp="20230615 15:27:35.963" level="INFO">${voucherData} = error</msg>
+<status status="PASS" starttime="20230615 15:26:59.766" endtime="20230615 15:27:35.964"/>
+</kw>
+<if>
+<branch type="IF" condition="&quot;${voucherData}&quot; != &quot;error&quot; and &quot;${voucherData}&quot; != &quot;${None}&quot;">
+<kw name="Log To Console" library="BuiltIn">
+<arg>${\n}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.965" endtime="20230615 15:27:35.966"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>dict is: ${voucherData}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.970" endtime="20230615 15:27:35.973"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${voucher_amount}</var>
+<arg>${voucherData['amount']}</arg>
+<arg>.00</arg>
+<arg>${EMPTY}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.974" endtime="20230615 15:27:35.975"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${voucher_amount}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.976" endtime="20230615 15:27:35.976"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Amount is :${voucher_amount}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.976" endtime="20230615 15:27:35.977"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Voucher number is :${voucherData['voucherNo']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.977" endtime="20230615 15:27:35.977"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Voucher date is :${voucherData['date']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.977" endtime="20230615 15:27:35.977"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Voucher issued to is :${voucherData['issuedTo']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:35.978" endtime="20230615 15:27:35.978"/>
+</kw>
+<return>
+<value>${voucherData}</value>
+<status status="NOT RUN" starttime="20230615 15:27:35.978" endtime="20230615 15:27:35.978"/>
+</return>
+<status status="NOT RUN" starttime="20230615 15:27:35.964" endtime="20230615 15:27:35.978"/>
+</branch>
+<branch type="ELSE">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:35.979" level="INFO">${status} = Invalid</msg>
+<status status="PASS" starttime="20230615 15:27:35.979" endtime="20230615 15:27:35.979"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comment}</var>
+<arg>Failed to extracting the pdf files</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:35.982" level="INFO">${comment} = Failed to extracting the pdf files</msg>
+<status status="PASS" starttime="20230615 15:27:35.980" endtime="20230615 15:27:35.982"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<arg>${status}</arg>
+<arg>${comment}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<msg timestamp="20230615 15:27:36.028" level="INFO">Update successful.</msg>
+<status status="PASS" starttime="20230615 15:27:35.982" endtime="20230615 15:27:36.029"/>
+</kw>
+<return>
+<value>'error'</value>
+<status status="PASS" starttime="20230615 15:27:36.029" endtime="20230615 15:27:36.030"/>
+</return>
+<status status="PASS" starttime="20230615 15:27:35.979" endtime="20230615 15:27:36.030"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:35.964" endtime="20230615 15:27:36.030"/>
+</if>
+<msg timestamp="20230615 15:27:36.032" level="INFO">${voucherData} = 'error'</msg>
+<status status="PASS" starttime="20230615 15:26:59.765" endtime="20230615 15:27:36.032"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${voucherData} == 'error'</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<msg timestamp="20230615 15:27:36.033" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20230615 15:27:36.032" endtime="20230615 15:27:36.035"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${comments}</var>
+<arg>check voucher data matching based on input file</arg>
+<arg>${voucherData}</arg>
+<arg>${input_data_table_element}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.035" endtime="20230615 15:27:36.036"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${status}' == 'FAIL'</arg>
+<arg>update_status_to_DB</arg>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.036" endtime="20230615 15:27:36.036"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:23.327" endtime="20230615 15:27:36.036"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>pdf doesn't exists for ${vr_name}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.037" endtime="20230615 15:27:36.038"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.037" endtime="20230615 15:27:36.039"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.327" endtime="20230615 15:27:36.039"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:23.325" endtime="20230615 15:27:36.039"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:23.324" endtime="20230615 15:27:36.040"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:23.322" endtime="20230615 15:27:36.040"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:23.321" endtime="20230615 15:27:36.040"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>keyword done- Find Matching PDF Files</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:27:36.045" level="INFO">keyword done- Find Matching PDF Files</msg>
+<status status="PASS" starttime="20230615 15:27:36.043" endtime="20230615 15:27:36.045"/>
+</kw>
+<return>
+<value>${pdf_exist}</value>
+<status status="PASS" starttime="20230615 15:27:36.046" endtime="20230615 15:27:36.046"/>
+</return>
+<msg timestamp="20230615 15:27:36.048" level="INFO">${pdf_exist} = True</msg>
+<status status="PASS" starttime="20230615 15:26:23.261" endtime="20230615 15:27:36.048"/>
+</kw>
+<if>
+<branch type="IF" condition="${pdf_exist} == $False">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.049" endtime="20230615 15:27:36.049"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>No voucher pdf exist</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.050" endtime="20230615 15:27:36.050"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${vr_no}-Update to DB- No voucher document exist</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.050" endtime="20230615 15:27:36.050"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>voucher: ${vr_no} is Invalid</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.050" endtime="20230615 15:27:36.050"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.050" endtime="20230615 15:27:36.050"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Db loading status is ${update_status}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.051" endtime="20230615 15:27:36.051"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.049" endtime="20230615 15:27:36.051"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.048" endtime="20230615 15:27:36.051"/>
+</if>
+<status status="PASS" starttime="20230615 15:26:23.256" endtime="20230615 15:27:36.051"/>
+</iter>
+<iter>
+<var name="${input_data_table_element}">{'voucher_legalentity': 'KPMG_JLR-MV114', 'voucher_number': 'JLR-MV114', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Marketing Expense', 'issued_To': 'Poonam (37559)',...</var>
+<kw name="Set Variable" library="BuiltIn">
+<var>${vr_no}</var>
+<arg>${input_data_table_element['voucher_number']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.060" level="INFO">${vr_no} = JLR-MV114</msg>
+<status status="PASS" starttime="20230615 15:27:36.058" endtime="20230615 15:27:36.060"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${voucher_legalentity}</var>
+<arg>${input_data_table_element['voucher_legalentity']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.060" level="INFO">${voucher_legalentity} = KPMG_JLR-MV114</msg>
+<status status="PASS" starttime="20230615 15:27:36.060" endtime="20230615 15:27:36.061"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${voucher_legalentity}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20230615 15:27:36.061" level="INFO">${voucher_legalentity} = KPMG_JLR-MV114</msg>
+<status status="PASS" starttime="20230615 15:27:36.061" endtime="20230615 15:27:36.062"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${vr_name}</var>
+<arg>${vr_no}.pdf</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.063" level="INFO">${vr_name} = JLR-MV114.pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.062" endtime="20230615 15:27:36.063"/>
+</kw>
+<kw name="Find Matching PDF Files" library="VoucherDataExtraction">
+<var>${pdf_exist}</var>
+<arg>${folder}</arg>
+<arg>${vr_name}</arg>
+<arg>${input_data_table_element}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_exist}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.065" level="INFO">${pdf_exist} = False</msg>
+<status status="PASS" starttime="20230615 15:27:36.065" endtime="20230615 15:27:36.066"/>
+</kw>
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${folder}</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:27:36.072" level="INFO">${pdf_files} = [File(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\input_47.xlsx', name='input_47.xlsx', size=16616, mtime=1686822982.589064)]</msg>
+<status status="PASS" starttime="20230615 15:27:36.066" endtime="20230615 15:27:36.073"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${skip_subfolder}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.076" level="INFO">${skip_subfolder} = False</msg>
+<status status="PASS" starttime="20230615 15:27:36.074" endtime="20230615 15:27:36.076"/>
+</kw>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{pdf_files}</value>
+<iter>
+<var name="${element}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\input_47.xlsx</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension}</var>
+<arg>${element}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:27:36.079" level="INFO">${extension} = .xlsx</msg>
+<status status="PASS" starttime="20230615 15:27:36.077" endtime="20230615 15:27:36.079"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension}' == '.pdf'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${skip_subfolder}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.080" endtime="20230615 15:27:36.080"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.080" endtime="20230615 15:27:36.080"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.079" endtime="20230615 15:27:36.080"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.079" endtime="20230615 15:27:36.080"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.077" endtime="20230615 15:27:36.081"/>
+</iter>
+<status status="PASS" starttime="20230615 15:27:36.077" endtime="20230615 15:27:36.081"/>
+</for>
+<if>
+<branch type="IF" condition="${skip_subfolder} != $True">
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${sub_folders}</var>
+<arg>${folder}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:27:36.083" level="INFO">${sub_folders} = [Directory(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\JLR-MV134', name='JLR-MV134')]</msg>
+<status status="PASS" starttime="20230615 15:27:36.081" endtime="20230615 15:27:36.083"/>
+</kw>
+<for flavor="IN">
+<var>${sub_folder}</var>
+<value>@{sub_folders}</value>
+<iter>
+<var name="${sub_folder}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134</var>
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${filename}</var>
+<arg>${sub_folder}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:27:36.085" level="INFO">${filename} = JLR-MV134</msg>
+<status status="PASS" starttime="20230615 15:27:36.085" endtime="20230615 15:27:36.085"/>
+</kw>
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${zip_sub_folders}</var>
+<arg>${sub_folder}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:27:36.090" level="INFO">${zip_sub_folders} = []</msg>
+<status status="PASS" starttime="20230615 15:27:36.086" endtime="20230615 15:27:36.090"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${getlength}</var>
+<arg>${zip_sub_folders}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20230615 15:27:36.092" level="INFO">Length is 0</msg>
+<msg timestamp="20230615 15:27:36.092" level="INFO">${getlength} = 0</msg>
+<status status="PASS" starttime="20230615 15:27:36.092" endtime="20230615 15:27:36.093"/>
+</kw>
+<if>
+<branch type="IF" condition="${getlength} &gt; 0">
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${zip_sub_folders}[0]</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.094" endtime="20230615 15:27:36.094"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>pdf file exist in the child folder of subfodler</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.094" endtime="20230615 15:27:36.094"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.093" endtime="20230615 15:27:36.094"/>
+</branch>
+<branch type="ELSE">
+<kw name="List Files In Directory" library="RPA.FileSystem">
+<var>${pdf_files}</var>
+<arg>${sub_folder}</arg>
+<doc>Lists all the files in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:27:36.098" level="INFO">${pdf_files} = [File(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42\\JLR-MV134\\JLR-MV113.pdf', name='JLR-MV113.pdf', size=785290, mtime=1686822253.5049736), File(path='D:\\Ma...</msg>
+<status status="PASS" starttime="20230615 15:27:36.095" endtime="20230615 15:27:36.098"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>pdf file exist in the sub folder</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:27:36.099" endtime="20230615 15:27:36.141"/>
+</kw>
+<status status="PASS" starttime="20230615 15:27:36.095" endtime="20230615 15:27:36.142"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.093" endtime="20230615 15:27:36.143"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.084" endtime="20230615 15:27:36.143"/>
+</iter>
+<status status="PASS" starttime="20230615 15:27:36.084" endtime="20230615 15:27:36.143"/>
+</for>
+<status status="PASS" starttime="20230615 15:27:36.081" endtime="20230615 15:27:36.143"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.081" endtime="20230615 15:27:36.144"/>
+</if>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{pdf_files}</value>
+<iter>
+<var name="${element}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV113.pdf</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension}</var>
+<arg>${element}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:27:36.147" level="INFO">${extension} = .pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.146" endtime="20230615 15:27:36.147"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension}' == '.pdf'">
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${pdf_file_name}</var>
+<arg>${element}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:27:36.149" level="INFO">${pdf_file_name} = JLR-MV113.pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.149" endtime="20230615 15:27:36.149"/>
+</kw>
+<if>
+<branch type="IF" condition="'${vr_name}' == '${pdf_file_name}'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_file_path}</var>
+<arg>${element}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.150" endtime="20230615 15:27:36.150"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_exist}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.150" endtime="20230615 15:27:36.151"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${azure_key}</var>
+<arg>${CONFIG}[SubscriptionKey]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.151" endtime="20230615 15:27:36.153"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${endpoint}</var>
+<arg>${CONFIG}[EndPoint]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.153" endtime="20230615 15:27:36.153"/>
+</kw>
+<kw name="Sign Checking" library="signaturechecking">
+<var>${sign_status}</var>
+<arg>${pdf_file_path}</arg>
+<status status="NOT RUN" starttime="20230615 15:27:36.159" endtime="20230615 15:27:36.159"/>
+</kw>
+<if>
+<branch type="IF" condition="'${sign_status}' == 'error'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.161" endtime="20230615 15:27:36.162"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'issues in signature detection ${vr_name}'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.162" endtime="20230615 15:27:36.163"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.170" endtime="20230615 15:27:36.174"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.175" endtime="20230615 15:27:36.176"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.160" endtime="20230615 15:27:36.176"/>
+</branch>
+<branch type="ELSE IF" condition="${sign_status} == $True">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.177" endtime="20230615 15:27:36.177"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'Duplicate signature detected'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.178" endtime="20230615 15:27:36.178"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.178" endtime="20230615 15:27:36.179"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.179" endtime="20230615 15:27:36.179"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.176" endtime="20230615 15:27:36.179"/>
+</branch>
+<status status="NOT RUN" starttime="20230615 15:27:36.160" endtime="20230615 15:27:36.180"/>
+</if>
+<kw name="extracting voucher data from vouchers" library="DocExtractAndDBUpddate">
+<var>${voucherData}</var>
+<arg>${pdf_file_path}</arg>
+<arg>${endpoint}</arg>
+<arg>${azure_key}</arg>
+<status status="NOT RUN" starttime="20230615 15:27:36.180" endtime="20230615 15:27:36.180"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${voucherData} == 'error'</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.181" endtime="20230615 15:27:36.181"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${comments}</var>
+<arg>check voucher data matching based on input file</arg>
+<arg>${voucherData}</arg>
+<arg>${input_data_table_element}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.181" endtime="20230615 15:27:36.182"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${status}' == 'FAIL'</arg>
+<arg>update_status_to_DB</arg>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:36.182" endtime="20230615 15:27:36.182"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:36.150" endtime="20230615 15:27:36.182"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>pdf doesn't exists for ${vr_name}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:27:36.184" level="INFO">pdf doesn't exists for JLR-MV114.pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.184" endtime="20230615 15:27:36.184"/>
+</kw>
+<status status="PASS" starttime="20230615 15:27:36.184" endtime="20230615 15:27:36.185"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.149" endtime="20230615 15:27:36.185"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.148" endtime="20230615 15:27:36.185"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.148" endtime="20230615 15:27:36.185"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.145" endtime="20230615 15:27:36.185"/>
+</iter>
+<iter>
+<var name="${element}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV114.pdf</var>
+<kw name="Get File Extension" library="RPA.FileSystem">
+<var>${extension}</var>
+<arg>${element}</arg>
+<doc>Returns the suffix for the file.</doc>
+<msg timestamp="20230615 15:27:36.186" level="INFO">${extension} = .pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.186" endtime="20230615 15:27:36.186"/>
+</kw>
+<if>
+<branch type="IF" condition="'${extension}' == '.pdf'">
+<kw name="Get File Name" library="RPA.FileSystem">
+<var>${pdf_file_name}</var>
+<arg>${element}</arg>
+<doc>Returns only the full file name portion of a path.</doc>
+<msg timestamp="20230615 15:27:36.190" level="INFO">${pdf_file_name} = JLR-MV114.pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.186" endtime="20230615 15:27:36.191"/>
+</kw>
+<if>
+<branch type="IF" condition="'${vr_name}' == '${pdf_file_name}'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_file_path}</var>
+<arg>${element}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.193" level="INFO">${pdf_file_path} = D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV114.pdf</msg>
+<status status="PASS" starttime="20230615 15:27:36.193" endtime="20230615 15:27:36.193"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${pdf_exist}</var>
+<arg>${True}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.194" level="INFO">${pdf_exist} = True</msg>
+<status status="PASS" starttime="20230615 15:27:36.194" endtime="20230615 15:27:36.195"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${azure_key}</var>
+<arg>${CONFIG}[SubscriptionKey]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.195" level="INFO">${azure_key} = 34729f664d044096bc9e06e162f7a47e</msg>
+<status status="PASS" starttime="20230615 15:27:36.195" endtime="20230615 15:27:36.195"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${endpoint}</var>
+<arg>${CONFIG}[EndPoint]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:27:36.197" level="INFO">${endpoint} = https://quadanceocrgroup.cognitiveservices.azure.com/</msg>
+<status status="PASS" starttime="20230615 15:27:36.196" endtime="20230615 15:27:36.197"/>
+</kw>
+<kw name="Sign Checking" library="signaturechecking">
+<var>${sign_status}</var>
+<arg>${pdf_file_path}</arg>
+<msg timestamp="20230615 15:27:43.104" level="INFO">Loading pretrained weights from url (https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-rsb-weights/resnet50_a1_0-14fe96d1.pth)</msg>
+<msg timestamp="20230615 15:27:59.973" level="INFO">&lt;class 'RPA.FileSystem.File'&gt;
+D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV114.pdf
+D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42\JLR-MV134\JLR-MV114.pdf
+Looking for C:\Users\Q0042\.keras-ocr\craft_mlt_25k.h5
+Looking for C:\Users\Q0042\.keras-ocr\crnn_kurapan.h5
+
+1/1 [==============================] - ETA: 0s
+1/1 [==============================] - 3s 3s/step
+
+1/1 [==============================] - ETA: 0s
+1/1 [==============================] - 3s 3s/step
+0.3734259840521134
+True</msg>
+<msg timestamp="20230615 15:27:59.984" level="INFO">${sign_status} = True</msg>
+<status status="PASS" starttime="20230615 15:27:36.197" endtime="20230615 15:27:59.985"/>
+</kw>
+<if>
+<branch type="IF" condition="'${sign_status}' == 'error'">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:27:59.994" endtime="20230615 15:27:59.995"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'issues in signature detection ${vr_name}'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.000" endtime="20230615 15:28:00.002"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.003" endtime="20230615 15:28:00.004"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.005" endtime="20230615 15:28:00.005"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:27:59.990" endtime="20230615 15:28:00.005"/>
+</branch>
+<branch type="ELSE IF" condition="${sign_status} == $True">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:28:00.009" level="INFO">${status} = Invalid</msg>
+<status status="PASS" starttime="20230615 15:28:00.007" endtime="20230615 15:28:00.009"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>'Duplicate signature detected'</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:28:00.011" level="INFO">${comments} = 'Duplicate signature detected'</msg>
+<status status="PASS" starttime="20230615 15:28:00.010" endtime="20230615 15:28:00.011"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<msg timestamp="20230615 15:28:00.094" level="INFO">Update successful.</msg>
+<msg timestamp="20230615 15:28:00.096" level="INFO">${update_status} = True</msg>
+<status status="PASS" starttime="20230615 15:28:00.013" endtime="20230615 15:28:00.099"/>
+</kw>
+<kw name="Exit For Loop" library="BuiltIn">
+<doc>Stops executing the enclosing FOR loop.</doc>
+<msg timestamp="20230615 15:28:00.102" level="INFO">Exiting for loop altogether.</msg>
+<status status="PASS" starttime="20230615 15:28:00.100" endtime="20230615 15:28:00.104"/>
+</kw>
+<status status="PASS" starttime="20230615 15:28:00.007" endtime="20230615 15:28:00.104"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:59.988" endtime="20230615 15:28:00.105"/>
+</if>
+<kw name="extracting voucher data from vouchers" library="DocExtractAndDBUpddate">
+<var>${voucherData}</var>
+<arg>${pdf_file_path}</arg>
+<arg>${endpoint}</arg>
+<arg>${azure_key}</arg>
+<status status="NOT RUN" starttime="20230615 15:28:00.105" endtime="20230615 15:28:00.106"/>
+</kw>
+<kw name="Exit For Loop If" library="BuiltIn">
+<arg>${voucherData} == 'error'</arg>
+<doc>Stops executing the enclosing FOR loop if the ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.107" endtime="20230615 15:28:00.107"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<var>${comments}</var>
+<arg>check voucher data matching based on input file</arg>
+<arg>${voucherData}</arg>
+<arg>${input_data_table_element}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.108" endtime="20230615 15:28:00.108"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${status}' == 'FAIL'</arg>
+<arg>update_status_to_DB</arg>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.109" endtime="20230615 15:28:00.109"/>
+</kw>
+<status status="PASS" starttime="20230615 15:27:36.192" endtime="20230615 15:28:00.110"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" library="BuiltIn">
+<arg>pdf doesn't exists for ${vr_name}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.111" endtime="20230615 15:28:00.112"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:28:00.110" endtime="20230615 15:28:00.112"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.191" endtime="20230615 15:28:00.112"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.186" endtime="20230615 15:28:00.113"/>
+</branch>
+<status status="PASS" starttime="20230615 15:27:36.186" endtime="20230615 15:28:00.116"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.185" endtime="20230615 15:28:00.117"/>
+</iter>
+<status status="PASS" starttime="20230615 15:27:36.144" endtime="20230615 15:28:00.119"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>keyword done- Find Matching PDF Files</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:28:00.121" level="INFO">keyword done- Find Matching PDF Files</msg>
+<status status="PASS" starttime="20230615 15:28:00.120" endtime="20230615 15:28:00.121"/>
+</kw>
+<return>
+<value>${pdf_exist}</value>
+<status status="PASS" starttime="20230615 15:28:00.122" endtime="20230615 15:28:00.122"/>
+</return>
+<msg timestamp="20230615 15:28:00.123" level="INFO">${pdf_exist} = True</msg>
+<status status="PASS" starttime="20230615 15:27:36.063" endtime="20230615 15:28:00.124"/>
+</kw>
+<if>
+<branch type="IF" condition="${pdf_exist} == $False">
+<kw name="Set Variable" library="BuiltIn">
+<var>${status}</var>
+<arg>Invalid</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.126" endtime="20230615 15:28:00.127"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${comments}</var>
+<arg>No voucher pdf exist</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.127" endtime="20230615 15:28:00.129"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${vr_no}-Update to DB- No voucher document exist</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.132" endtime="20230615 15:28:00.132"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>voucher: ${vr_no} is Invalid</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.134" endtime="20230615 15:28:00.135"/>
+</kw>
+<kw name="Update Status To DB" library="update_exceltoDB">
+<var>${update_status}</var>
+<arg>${status}</arg>
+<arg>${comments}</arg>
+<arg>${voucher_legalentity}</arg>
+<arg>${pymysql_connection}</arg>
+<doc>Update the status and comment columns in the database for a given primary key</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.136" endtime="20230615 15:28:00.136"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Db loading status is ${update_status}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" starttime="20230615 15:28:00.137" endtime="20230615 15:28:00.138"/>
+</kw>
+<status status="NOT RUN" starttime="20230615 15:28:00.125" endtime="20230615 15:28:00.138"/>
+</branch>
+<status status="PASS" starttime="20230615 15:28:00.124" endtime="20230615 15:28:00.139"/>
+</if>
+<status status="PASS" starttime="20230615 15:27:36.055" endtime="20230615 15:28:00.139"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:23.255" endtime="20230615 15:28:00.140"/>
+</for>
+<kw name="Log" library="BuiltIn">
+<arg>key done-Fetching each row from DatabaseProcess</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:28:00.143" level="INFO">key done-Fetching each row from DatabaseProcess</msg>
+<status status="PASS" starttime="20230615 15:28:00.142" endtime="20230615 15:28:00.143"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:23.199" endtime="20230615 15:28:00.144"/>
+</kw>
+<kw name="report fetching and send mail" library="VoucherDataExtraction">
+<kw name="FetchDB For FinalReport" library="runreportCreation">
+<var>${df_list}</var>
+<arg>${INPUT_DB_TABLE}</arg>
+<arg>${mail_id}</arg>
+<doc>This is used to fetch data from database having status columns New
+then all sorted data is returned based on the legal entity.</doc>
+<msg timestamp="20230615 15:28:00.542" level="INFO">exception found is Not an executable object: "DELETE FROM project_petty_table WHERE status = 'Invalid'"</msg>
+<msg timestamp="20230615 15:28:00.543" level="INFO">${df_list} = [{'voucher_legalentity': 'KPMG_JLR-MV113', 'voucher_number': 'JLR-MV113', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Travelling Food &amp; Accommodation Expense', 'issued...</msg>
+<status status="PASS" starttime="20230615 15:28:00.152" endtime="20230615 15:28:00.544"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>final data list returned from db:${df_list}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:28:00.544" endtime="20230615 15:28:00.552"/>
+</kw>
+<kw name="Update Status ToExcel For Report" library="runreportCreation">
+<var>${is_updated}</var>
+<arg>${df_list}</arg>
+<arg>${input_excel_path}</arg>
+<msg timestamp="20230615 15:28:01.603" level="INFO">[{'voucher_legalentity': 'KPMG_JLR-MV113', 'voucher_number': 'JLR-MV113', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Travelling Food &amp; Accommodation Expense', 'issued_To': 'Poonam (37559)', 'description': 'Marketing Traveling and food expense paid for the dates 10.12.2022 to 18.12.2022 rs.1730', 'debit': 1730.0, 'credit': None, 'closing_balance': '555', 'cost_center_code': '123', 'emp_code': '34436', 'interior_code': '1234', 'work_code': 'SGCL-PRJ-00285', 'run_status': None, 'mail_id': 'abhijith.p@quadance.com', 'mail_sent': 0, 'status': 'Invalid', 'comments': 'Failed to extracting the pdf files', 'inserted_date': Timestamp('2023-06-15 15:26:23')}, {'voucher_legalentity': 'KPMG_JLR-MV114', 'voucher_number': 'JLR-MV114', 'date': Timestamp('2022-12-19 00:00:00'), 'type': None, 'expense_category': 'Marketing Expense', 'issued_To': 'Poonam (37559)', 'description': 'purchased cake for customer wedding anniversary rs.350', 'debit': 350.0, 'credit': None, 'closing_balance': '12000', 'cost_center_code': '123', 'emp_code': '34436', 'interior_code': '1234', 'work_code': 'SGCL-PRJ-00285', 'run_status': None, 'mail_id': 'abhijith.p@quadance.com', 'mail_sent': 0, 'status': 'Invalid', 'comments': "'Duplicate signature detected'", 'inserted_date': Timestamp('2023-06-15 15:26:23')}]</msg>
+<msg timestamp="20230615 15:28:01.603" level="INFO">${is_updated} = True</msg>
+<status status="PASS" starttime="20230615 15:28:00.553" endtime="20230615 15:28:01.603"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>updating to the final report ${is_updated}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230615 15:28:01.604" endtime="20230615 15:28:01.606"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${subject}</var>
+<arg>Success: Run report</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:28:01.608" level="INFO">${subject} = Success: Run report</msg>
+<status status="PASS" starttime="20230615 15:28:01.607" endtime="20230615 15:28:01.608"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>Hi Team, \n\nplease find the attached excel file containing final run report.\n\nThank you,\nBot</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230615 15:28:01.611" level="INFO">${body} = Hi Team, 
+
+please find the attached excel file containing final run report.
+
+Thank you,
+Bot</msg>
+<status status="PASS" starttime="20230615 15:28:01.609" endtime="20230615 15:28:01.613"/>
+</kw>
+<kw name="send mail with excel report" library="emailFetchingPy">
+<arg>${mail_id}</arg>
+<arg>${input_excel_path}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<kw name="Open Application" library="RPA.Outlook.Application">
+<doc>Open the Outlook application.</doc>
+<status status="PASS" starttime="20230615 15:28:01.620" endtime="20230615 15:28:01.772"/>
+</kw>
+<kw name="Send Email" library="RPA.Outlook.Application">
+<arg>${senderId}</arg>
+<arg>${subject}</arg>
+<arg>${body}</arg>
+<arg>attachments=${reportpath}</arg>
+<doc>Send email with Outlook</doc>
+<status status="PASS" starttime="20230615 15:28:01.773" endtime="20230615 15:28:02.444"/>
+</kw>
+<status status="PASS" starttime="20230615 15:28:01.616" endtime="20230615 15:28:02.450"/>
+</kw>
+<status status="PASS" starttime="20230615 15:28:00.149" endtime="20230615 15:28:02.450"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${folder}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:28:02.456" level="INFO">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:28:02.452" endtime="20230615 15:28:02.456"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:19.597" endtime="20230615 15:28:02.456"/>
+</iter>
+<status status="PASS" starttime="20230615 15:26:19.595" endtime="20230615 15:28:02.457"/>
+</for>
+<status status="PASS" starttime="20230615 15:26:19.547" endtime="20230615 15:28:02.458"/>
+</kw>
+<msg timestamp="20230615 15:28:02.484" level="INFO">${DB_upload_Status} = True</msg>
+<status status="PASS" starttime="20230615 15:26:19.544" endtime="20230615 15:28:02.484"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:19.543" endtime="20230615 15:28:02.487"/>
+</branch>
+<status status="PASS" starttime="20230615 15:26:19.542" endtime="20230615 15:28:02.488"/>
+</if>
+<kw name="moving folder from input folder" library="VoucherDataExtraction">
+<kw name="Get Init Details" library="MyLibrary">
+<var>${path}</var>
+<msg timestamp="20230615 15:28:02.495" level="INFO">${path} = D:\MalabarProjectGit</msg>
+<status status="PASS" starttime="20230615 15:28:02.493" endtime="20230615 15:28:02.507"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${temp_path}</var>
+<arg>${path}${CONFIG['RootFolder']}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230615 15:28:02.523" level="INFO">${temp_path} = D:\MalabarProjectGit\InputFolder\</msg>
+<status status="PASS" starttime="20230615 15:28:02.508" endtime="20230615 15:28:02.523"/>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<var>${proccessed_folder}</var>
+<arg>${path}${CONFIG['Processfolder']}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<msg timestamp="20230615 15:28:02.527" level="INFO">${proccessed_folder} = D:\MalabarProjectGit\ProccessedFolder\</msg>
+<status status="PASS" starttime="20230615 15:28:02.524" endtime="20230615 15:28:02.527"/>
+</kw>
+<kw name="List Directories In Directory" library="RPA.FileSystem">
+<var>${input_folders}</var>
+<arg>${temp_path}</arg>
+<doc>Lists all the directories in the given directory, relative to it.</doc>
+<msg timestamp="20230615 15:28:02.538" level="INFO">${input_folders} = [Directory(path='D:\\MalabarProjectGit\\InputFolder\\abhijith.p@quadance.com_ 2023-06-15 13-13-42', name='abhijith.p@quadance.com_ 2023-06-15 13-13-42')]</msg>
+<status status="PASS" starttime="20230615 15:28:02.535" endtime="20230615 15:28:02.539"/>
+</kw>
+<for flavor="IN">
+<var>${folder}</var>
+<value>@{input_folders}</value>
+<iter>
+<var name="${folder}">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42</var>
+<kw name="Log" library="BuiltIn">
+<arg>${folder}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:28:02.543" level="INFO">D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42</msg>
+<status status="PASS" starttime="20230615 15:28:02.542" endtime="20230615 15:28:02.543"/>
+</kw>
+<kw name="Move To Proccessed Folder" library="runreportCreation">
+<arg>${folder}</arg>
+<arg>${proccessed_folder}</arg>
+<doc>for moving folder from niput folder to processed folder. Processed folder must be there in mail directory.</doc>
+<msg timestamp="20230615 15:28:02.553" level="INFO">Error occurred while moving the folder: Destination path 'D:\MalabarProjectGit\ProccessedFolder\abhijith.p@quadance.com_ 2023-06-15 13-13-42' already exists</msg>
+<status status="PASS" starttime="20230615 15:28:02.548" endtime="20230615 15:28:02.554"/>
+</kw>
+<status status="PASS" starttime="20230615 15:28:02.541" endtime="20230615 15:28:02.555"/>
+</iter>
+<status status="PASS" starttime="20230615 15:28:02.540" endtime="20230615 15:28:02.555"/>
+</for>
+<status status="PASS" starttime="20230615 15:28:02.491" endtime="20230615 15:28:02.556"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>Done</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230615 15:28:02.586" level="INFO">Done</msg>
+<status status="PASS" starttime="20230615 15:28:02.584" endtime="20230615 15:28:02.588"/>
+</kw>
+<status status="PASS" starttime="20230615 15:26:17.959" endtime="20230615 15:28:02.593"/>
+</test>
+<doc>Template robot main suite.</doc>
+<status status="PASS" starttime="20230615 15:25:28.641" endtime="20230615 15:28:02.623"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

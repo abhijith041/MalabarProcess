@@ -1,0 +1,11 @@
+opencv-python
+numpy
+keras-ocr
+scikit-image
+pdf2image
+tensorflow
+transformers
+Pillow
+torch
+timm
+planar
