@@ -35,13 +35,14 @@ extracting voucher data from vouchers
         Log To Console    Voucher number is :${voucherData['voucherNo']}
         Log To Console    Voucher date is :${voucherData['date']}
         Log To Console    Voucher issued to is :${voucherData['issuedTo']}
+        Log To Console    Supporting document amount is :${voucherData['supportingDocAmount']}
 
         # Log To Console    Supporting Document found :${voucherData['SupportDoc']}
         
         RETURN    ${voucherData}
     ELSE
         ${status}     Set Variable    Invalid
-        ${comment}     Set Variable    Failed to extracting the pdf files
+        ${comment}     Set Variable    Failed to extract data from the pdf file
         update_status_to_DB     ${status}      ${comment}     ${voucher_legalentity}     ${pymysql_connection}
         RETURN    'error'
     END
@@ -53,11 +54,8 @@ check voucher data matching based on input file
     # input     dictionary:    ${input_data_table_element} - input excel sheet data item based on voucher number. 
 
     [Arguments]    ${voucherData}    ${input_data_table_element}
-    
-    
+     
     ${inputSheetDate}    Set Variable    ${input_data_table_element['date']}
-
-    
 
     ${voucherNumber}    Set Variable    ${input_data_table_element['voucher_number']}
     ${voucherNumber}    Convert To Upper Case    ${voucherNumber}

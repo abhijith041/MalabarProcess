@@ -38,6 +38,18 @@ def fetch_email_based_on_subject(subject_line,duration,start_time):
 
 
 
+def get_email_attachments_name_in_list(email):
+    '''collect email attachments name '''
+    attachmentsNames = []
+    for attachments in email.Attachments:
+        # print(attachments.filename)
+        filename = attachments.Filename
+        attachmentsNames.append(filename)
+    return attachmentsNames
+
+
+
+
 # working code, not in use but collect all emails from inbox folder.
 def fetch_email_based_on_subject_old2(subject_line):
     subject_line = str(subject_line)
@@ -49,14 +61,14 @@ def fetch_email_based_on_subject_old2(subject_line):
     return filtered_emails
 
 
-def download_attachments(attachment, save_location):
+def download_attachments(email, save_location):
     try:        
         os.makedirs(save_location, exist_ok=True)  # Create the save_location directory if it doesn't exist
-        # for attachment in email.Attachments:
-        file_extension = os.path.splitext(attachment.FileName)[1]
-        if file_extension.lower() in ['.zip', '.xlsx']:
-            attachment.SaveAsFile(os.path.join(save_location, attachment.FileName))
-            print(f"Downloaded attachment: {attachment.FileName}")
+        for attachment in email.Attachments:
+            file_extension = os.path.splitext(attachment.FileName)[1]
+            if file_extension.lower() in ['.zip', '.xlsx']:
+                attachment.SaveAsFile(os.path.join(save_location, attachment.FileName))
+                print(f"Downloaded attachment: {attachment.FileName}")
     
     except Exception as e:
         print(str(e))

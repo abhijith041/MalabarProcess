@@ -63,14 +63,14 @@ def update_excel_duplication(filename,where_value, New_Status):
 
 #update_excel_cell('New', 'Inprogress')
 
-def duplication_process(LE):
+# def duplication_process(LE):
 
-    df = pd.read_excel('C:/Users/Q0037/Documents/Malabar/VoucherVerificationProcess/InputFolder/Nehamathew@gmail.com/input.xlsx', skiprows=7)
+#     df = pd.read_excel('C:/Users/Q0037/Documents/Malabar/VoucherVerificationProcess/InputFolder/Nehamathew@gmail.com/input.xlsx', skiprows=7)
 
-    for index, row in df.iterrows():
-        voucher_no = row['voucher_number']      
-        vr_le = LE+'_'+voucher_no
-        print(vr_le)
+#     for index, row in df.iterrows():
+#         voucher_no = row['voucher_number']      
+#         vr_le = LE+'_'+voucher_no
+#         print(vr_le)
 
-duplication_process('MGPP')
+# duplication_process('MGPP')
 

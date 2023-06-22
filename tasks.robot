@@ -22,5 +22,5 @@ petty cash processing bot
         ${DB_upload_Status}=    Run Keyword And Return Status    processing each folders
     END
     moving folder from input folder
-    
+    # processing each folders
     Log  Done

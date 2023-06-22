@@ -66,7 +66,10 @@ def supporting_doc_checking(extracted_dict):
                             
                             if match:     
                             # supporting_doc_amount = re.search(r'\d+', item).group()
-                            
+                                supporting_doc_amount = match.group()
+                                # supporting_doc_amount = match
+                                supporting_doc_amount.replace('=','').replace('.','')
+                                # new code ends
                                 if supporting_doc_amount ==str(amount_check):
                                     count+1
                                     print("supporting doc match found, value is :",supporting_doc_amount)

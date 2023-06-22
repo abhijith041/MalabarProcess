@@ -54,13 +54,15 @@ moving folder from input folder
 
     ${path}    get_init_details   
     ${temp_path}    Catenate    ${path}${CONFIG['RootFolder']}
-    ${proccessed_folder}    Catenate    ${path}${CONFIG['Processfolder']}
+    # ${proccessed_folder}    Catenate    ${path}${CONFIG['Processfolder']}
+    ${proccessed_folder}    Catenate    ${CONFIG['Processfolder']}
     #${folderpath}    Catenate     ${temp_path}
     ${input_folders}=    List Directories In Directory     ${temp_path}
 
     FOR    ${folder}    IN    @{input_folders}
         Log    ${folder}
-        Move To Proccessed Folder    ${folder}     ${proccessed_folder}   
+        # Move To Proccessed Folder    ${folder}     ${proccessed_folder}
+        Move To Processed Folder    ${folder}    ${proccessed_folder}   
     END
 
 
@@ -71,7 +73,8 @@ processing each folders
     # ${newPath}     Evaluate    os.path.dirname('''${path}''')
     ${path}    get_init_details   
     ${temp_path}    Catenate    ${path}${CONFIG['RootFolder']}
-    ${proccessed_folder}    Catenate    ${path}${CONFIG['Processfolder']}
+    # ${proccessed_folder}    Catenate    ${path}${CONFIG['Processfolder']}
+    ${proccessed_folder}    set variable    ${CONFIG['Processfolder']}
     #${folderpath}    Catenate     ${temp_path}
     ${input_folders}=    List Directories In Directory     ${temp_path}
    
@@ -113,6 +116,7 @@ collect email id from folder name
     ${mail_id}    Evaluate    ''.join(${splitResult})   
     Log To Console    Mail id is: ${mail_id}
     RETURN    ${mail_id}
+
 
 Get the excel file and zip file
 #here getting the excel file and load to database, also unzip the zip file and store files in a folder
@@ -250,7 +254,7 @@ Fetching each row from DatabaseProcess
     [Arguments]    ${folder}
 #----------------------------fetching each row from database and store to list---------------------------------------------------------------
       
-    ${input_data_table}=    read_data_from_database    ${engine_str}
+    ${input_data_table} =   read_data_from_database
     Log    ${input_data_table}
 
     FOR    ${input_data_table_element}    IN    @{input_data_table}
@@ -335,7 +339,7 @@ Find Matching PDF Files
                     ${azure_key}    Set Variable    ${CONFIG}[SubscriptionKey]
                     ${endpoint}    Set Variable    ${CONFIG}[EndPoint]
 
-                    #here need to pass the matched pdf file name to next keyword for voucher signature math
+                    #Here need to pass the matched pdf file name to next keyword for voucher signature match
                     ${sign_status}    sign_checking    ${pdf_file_path}                    
                    
                      IF    '${sign_status}' == 'error'

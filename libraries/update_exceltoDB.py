@@ -94,7 +94,7 @@ def duplicate_check_database(voucher_legal_PK, engine_str):
 
     try:
         engine = create_engine(configVariables.dbConnectionString)
-        query = f"SELECT voucher_legalentity FROM project_petty_table WHERE voucher_legalentity = '{voucher_legal_PK}'"
+        query = f"SELECT voucher_legalentity FROM {configVariables.projectPettyTable} WHERE voucher_legalentity = '{voucher_legal_PK}'"
         df = pd.read_sql(query, con=engine)
         
         if len(df) > 0:
@@ -200,8 +200,17 @@ def upload_input_values_DB(legal_entity_code,cost_center_code, emp_code, interio
     
     """
     try:
+        
         excel_data = pd.read_excel(inputpath, skiprows=7)
-        excel_data['voucher_legalentity'] = legal_entity_code +'_'+ excel_data['voucher_number'].astype(str)
+
+        # collect only expected columns from excel to data frame
+        column_header = configVariables.column_header
+        excel_data  =   excel_data[column_header]
+        
+        # excel_data['voucher_legalentity'] = legal_entity_code +'_'+ excel_data['voucher_number'].astype(str)
+        # excel_data['voucher_legalentity'] = legal_entity_code + '_' + excel_data['voucher_number'].fillna('').astype(str)
+        excel_data['voucher_legalentity'] = legal_entity_code + '_' + excel_data['voucher_number'].fillna('').apply(lambda x: str(x).split('.')[0])
+
 
        # Remove rows where credit column is not NaN
         excel_data = excel_data[excel_data['credit'].isnull()]
@@ -233,6 +242,7 @@ def upload_input_values_DB(legal_entity_code,cost_center_code, emp_code, interio
             excel_data['interior_code'] = interior_code
             excel_data['work_code'] = work_code
             excel_data['mail_id'] = mail_id
+            excel_data['legal_entity_code'] = legal_entity_code
     
             #delete the duplication column from inputsheet
             excel_data.drop('duplication', inplace=True, axis=1)
@@ -247,8 +257,8 @@ def upload_input_values_DB(legal_entity_code,cost_center_code, emp_code, interio
             excel_data['date'] = pd.to_datetime(excel_data['date'], format='%d/%m/%Y', errors='coerce')
 
             # Insert the data using pandas to_sql
-            excel_data.to_sql("project_petty_table", con=engine, if_exists='append', index=False)
-            
+            #excel_data.to_sql("project_petty_table", con=engine, if_exists='append', index=False)
+            excel_data.to_sql(configVariables.projectPettyTable, con=engine, if_exists='append', index=False)
             # return noDataInDf =  False, dbupload = True, and voucherNo_empty 
             return noDataInDF, True, voucherNo_empty  # Data upload success
 
@@ -261,39 +271,7 @@ def upload_input_values_DB(legal_entity_code,cost_center_code, emp_code, interio
             # return noDataInDf =  True, dbupload = False, and voucherNo_empty
             return noDataInDF, False, voucherNo_empty
 
-        # # Check for NaN values in voucher number column
-        # if excel_data['voucher_number'].isnull().any():
-
-        #     excel_data = excel_data.dropna(subset=['voucher_number'])
-        #     # Assign "invalid" to voucher number column for NaN values
-        #     voucherNo_empty = 'invalid'
-        # else:
-        #     voucherNo_empty = None
-        
-        # # Add "columns" column with "constant" values
-        # excel_data['status'] = 'New'
-        # excel_data['cost_center_code'] = cost_center_code
-        # excel_data['emp_code'] = emp_code
-        # excel_data['interior_code'] = interior_code
-        # excel_data['work_code'] = work_code
-        # excel_data['mail_id'] = mail_id
- 
-        # #delete the duplication column from inputsheet
-        # excel_data.drop('duplication', inplace=True, axis=1)
-        
-        # #engine = create_engine('mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb')
-        # engine = create_engine(configVariables.dbConnectionString)
-
-        # # Convert DataFrame to a list of dictionaries
-        # data = excel_data.to_dict(orient='records')
-        
-        # # Format the date column
-        # excel_data['date'] = pd.to_datetime(excel_data['date'], format='%d/%m/%Y', errors='coerce')
-
-        # # Insert the data using pandas to_sql
-        # excel_data.to_sql("project_petty_table", con=engine, if_exists='append', index=False)
-        
-        # return True, voucherNo_empty  # Data upload success
+       
         
     except pd.io.sql.DatabaseError as e:
         if 'Duplicate entry' in str(e):
@@ -314,7 +292,7 @@ def upload_input_values_DB(legal_entity_code,cost_center_code, emp_code, interio
 #upload_input_values_DB('spsp', '2122', '123456', 'SGCL-PRJ-00235', 'SGCL-PRJ-00285', 'C:\\Users\\Q0037\\Documents\\Malabar\\VoucherVerificationProcess\\InputFolder\\Nehamathew@gmail.com\\input.xlsx','mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb','nibiyamonas')
 
 
-def read_data_from_database(engine_str):
+def read_data_from_database():
 
     """
     This is used to fetch data from database having status columns New
@@ -326,7 +304,8 @@ def read_data_from_database(engine_str):
         #engine = create_engine('mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb')
         engine = create_engine(configVariables.dbConnectionString)
 
-        query = "SELECT * FROM project_petty_table WHERE status = 'New'"
+       # query = "SELECT * FROM project_petty_table WHERE status = 'New'"
+        query = f"SELECT * FROM {configVariables.projectPettyTable} WHERE status = 'New'"
 
         # Execute the query and fetch data into a DataFrame
         df = pd.read_sql(query, con=engine)
@@ -354,14 +333,19 @@ def update_status_to_DB(status, comment, primary_key, pymysql_conn_str):
     """
 
     try:
-        conn = pymysql.connect(host='127.0.0.1',user='root',password='root',database='malabarprocessdb',port=3306)
+        # conn = pymysql.connect(configVariables.pymysqlConntionString)
+        conn = pymysql.connect(host=configVariables.host,user=configVariables.user,
+                               password=configVariables.password,database=configVariables.databaseName,
+                               port=configVariables.port)
+        # conn = pymysql.connect(host='127.0.0.1',user='root',password='root',database='malabarprocessdb',port=3306)
         #conn = pymysql.connect(pymysql_conn_str)
             #'mysql+pymysql://root:Password.123@127.0.0.1:3306/malabarprocessdb')
         
 
         cursor = conn.cursor()
 
-        sql = f"UPDATE project_petty_table SET status = %s, comments = %s WHERE voucher_legalentity = %s"
+        #sql = f"UPDATE project_petty_table SET status = %s, comments = %s WHERE voucher_legalentity = %s"
+        sql = f"UPDATE {configVariables.projectPettyTable} SET status = %s, comments = %s WHERE voucher_legalentity = %s"
         cursor.execute(sql, (status, comment, primary_key))
 
         conn.commit()

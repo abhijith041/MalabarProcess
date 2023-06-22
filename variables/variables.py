@@ -4,7 +4,8 @@ INPUT_DB_TABLE = "project_petty_table"
 ERP_DB_TABLE = "erp_transaction_table"
 CONNECTION_STRING = "mysql+pymysql://root:root@127.0.0.1:3306/malabarprocessdb"
 PYMYSQL_CONN_STRING = "host='127.0.0.1',user='root',password='root',database='malabarprocessdb',port=3306"
-CONFIG_FILE = "data/config.xlsx"
+# CONFIG_FILE = "data/config.xlsx"
+CONFIG_FILE =   r'C:/malabar_config/config.xlsx'
 
 
 TRANSACTION_ITEM = ""
@@ -26,8 +27,8 @@ BROWSER = ""
 
 # ---------------------- email fetching.robot file variables ----------------------
 
-emailSourceFolder               =   'Inbox'
-emailDestinationFolder          =   'readedMail'
+emailSourceFolder               =   'Inbox'         #   not using currently
+emailDestinationFolder          =   'readedMail'    #   not using currently
 EMAIL_SUBJECT                   =   ['Project Petty','marketing petty']
 #
 #  Define the duration in seconds (10 minutes = 600 seconds) -email polling duration

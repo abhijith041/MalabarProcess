@@ -1,0 +1,38 @@
+==============================================================================
+Tasks :: Template robot main suite.                                           
+==============================================================================
+petty cash processing bot                                             
+Process starting time is :2023-06-20 15:21:08
+Starting Time in Seconds: 1687254668.0
+
+Searching for email with subject : Project Petty
+
+Total email with given subject is: 1
+Email subject from collected mail is: project petty
+mail seder id : abhijith.p@quadance.com
+'2023-06-20 11:41:20'
+['files.zip', 'input_55.xlsx']
+excel attachments is: ['input_55.xlsx']
+zip attachments is: ['files.zip']
+excel attachment length is 1 and zip attachment length is 1
+downloading: files.zip
+downloading: input_55.xlsx
+
+Searching for email with subject : marketing petty
+
+Total email with given subject is: 0
+Current processing foler: D:\MalabarProjectGit\InputFolder\abhijith.p@quadance.com_ 2023-06-20 11-41-20
+Mail id is: abhijith.p@quadance.com
+No data in dataframe after removing duplicates :False
+Data upload to DB: True
+Sucessfully completed DB updation
+pdf file exist in the sub folder
+final data list returned from db:[{'voucher_legalentity': 'KPLM_KRK-PV043', 'voucher_number': 'KRK-PV043', 'date': Timestamp('2023-02-10 00:00:00'), 'type': 'work', 'expense_category': 'Electrical', 'issued_To': 'Muralidharan', 'description': 'Electrical', 'debit': 90.0, 'credit': None, 'closing_balance': None, 'cost_center_code': '5318', 'emp_code': '34436', 'interior_code': 'SGCL-PRJ-00235', 'work_code': 'SGCL-PRJ-00285', 'run_status': None, 'mail_id': 'abhijith.p@quadance.com', 'mail_sent': 0, 'status': 'Invalid', 'comments': "'Duplicate signature detected'", 'inserted_date': Timestamp('2023-06-20 15:21:12')}]
+updating to the final report True
+| PASS |
+------------------------------------------------------------------------------
+Tasks :: Template robot main suite.                                   | PASS |
+1 task, 1 passed, 0 failed
+==============================================================================
+Output:  D:\MalabarProjectGit\output\output.xml
+Log:     D:\MalabarProjectGit\output\log.html

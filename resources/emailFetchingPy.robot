@@ -13,6 +13,7 @@ Library    String
 
 *** Keywords ***
 Email Fetching Based On Subject
+    
 
     # Define the duration in seconds (10 minutes = 600 seconds) -email polling duration
     ${duration}    Set Variable    ${polling_duration}
@@ -48,7 +49,14 @@ Email Fetching Based On Subject
             ${attachmentCount}    Get Email Attachment Count    ${email}
             IF    ${attachmentCount} > 0
                 FOR    ${index}    IN RANGE    ${attachmentCount}
+
+                    # disable this if you are running code using .bat file
                     ${attachmentNames}    Get Email Attachments Name    ${email}    ${index}
+                    
+                    # disable this if you are running code using IDE
+                    # ${attachmentNames}    Get Email Attachments Name In List    ${email}
+                    
+                    log    ${attachmentNames}
                     # Append To List    ${attachmentNames}    ${attachment_name}
                 END
                 Log To Console    ${attachmentNames}
@@ -91,16 +99,19 @@ Email Fetching Based On Subject
                 Log    excel attachment length is 1 and zip attachment length is 1
                 
                 # log to console    downloading attachments: ${attachmentNames}
-                FOR    ${attachment}    IN    @{email.Attachments}
-                    Log To Console    downloading: ${attachment.FileName}
+                FOR    ${attachment}    IN    @{attachmentNames}
+                    Log To Console    downloading: ${attachment}
                     Log    downloading: ${attachment}
 
-                    IF    ".xlsx" in "${attachment.FileName}" or ".zip" in "${attachment.FileName}"
-                        Download Attachments    ${attachment}    ${attachmentDownloadPath}
-                    # Save Email Attachment
-                    # IF    ".xlsx" in "${attachment}[filename]" or ".zip" in "${attachment}[filename]"
-                    #     Save Email Attachments    ${attachment}    ${attachmentDownloadFolder}${/}InputFolder${/}${senderId}${/}
-                    END
+                    # downloading files using python code
+                    Download Attachments    ${email}    ${attachmentDownloadPath}
+
+                    # IF    ".xlsx" in "${attachment.FileName}" or ".zip" in "${attachment.FileName}"
+                    #     Download Attachments    ${attachment}    ${attachmentDownloadPath}
+                    # # Save Email Attachment
+                    # # IF    ".xlsx" in "${attachment}[filename]" or ".zip" in "${attachment}[filename]"
+                    # #     Save Email Attachments    ${attachment}    ${attachmentDownloadFolder}${/}InputFolder${/}${senderId}${/}
+                    # END
                 END
                 Mark Unread Email As Read    ${email}
 
@@ -176,6 +187,11 @@ process run starting time convert into seconds
 Get Email Attachments Name
     [Arguments]    ${email}    ${index}
     ${attachmentNames}    Create List
+    # Log    ${email.Attachments}
+    # Log To Console   ${email.Attachments}
+    ${emailAttachments}    Set Variable    ${email.Attachments}
+    # Log    ${emailAttachments}
+
     FOR    ${attachment}    IN    @{email.Attachments}
         Append To List    ${attachmentNames}    ${attachment.FileName}
     END
@@ -207,7 +223,7 @@ Get Attachment Filename
 send mail with excel report
     [Arguments]    ${senderId}    ${reportpath}    ${subject}    ${body}
 
-     open Application
+    open Application
     
     # ${subject}    Set Variable    Run report
     # Send Message    ${senderId}    ${mailSubject}    ${body}

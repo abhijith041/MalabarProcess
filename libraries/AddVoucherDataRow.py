@@ -32,7 +32,8 @@ def add_data_row_to_table(voucherData, engine):
 
         class MalabarTable(Base):
             # update tablename here
-            __tablename__ = 'erp_transaction_table'
+           # __tablename__ = 'erp_transaction_table'
+            __tablename__ = configVariables.erpExtractionTable
             voucher_legalentity = Column(String, primary_key=True)
             #voucherno_legal_entity = Column(String, primary_key=True)
             voucher_number = Column(String)            

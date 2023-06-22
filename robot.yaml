@@ -9,6 +9,7 @@ tasks:
   MalabarTask:
     shell: python -m robot --report NONE --outputdir output --logtitle "Task log" tasks.robot
 
+
   Run Example task:
     robotTaskName: Example task
 
